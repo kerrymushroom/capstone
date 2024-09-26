@@ -94,10 +94,127 @@
 
 \section{Design and Implementation}
     \subsection{Solution Strategy}
+    In order to use large language models to translate natural language into data visualization charts, the whole project is divided into several steps. To each LLM, Data processing methods may vary.
+    
+    This project utilized two kinds of LLM tools. One is general-purpose LLMs such as ChatGPT. This type of LLMs do not have a specific output format; so extra prompt engineering steps should be taken to restrict their output format.
+
+    The other kind is LLM based data visualization tools like NL4DV, nvBench(based on ncNET) and YoloPandas. Some data processing modules may have been integrated inside these tools.\cite{b2,b3,b4} A more feasible way is to use their built-in functions to deal with data. In this way,a more real performance differences will be shown.
+    
+    Generally, the project's workflow is divided into the following steps:
+    
+        \subsubsection{Choose or upload a dataset}
+            A dataset is a basic premise in the program. In this project, users can either use example dataset or upload their own datasets to visualize data.
+
+            By default, the project contains some default CSV example datasets such as Movies, Housing, Cars and so on. User can simply choose them by clicking corresponding radio buttons. These datasets come from the original paper.
+
+            When using customized dataset, the .CSV file have to uploaded to the project by clicking the "upload" button. After fully uploaded, users can see their data on the webpage.
+        
+        \subsubsection{Data set preprocessing}
+            Pandas is imported to deal with .CSV files. At this step, every column's title and its data format is been recorded. This information will become part of the prompt sent to LLM to get the right code.
+
+        \subsubsection{Chart format prompts}
+            Some formatting and drawing instructions will be added. In this step, Basic information such as drawing library and python version; chart style information such as chart title and X, Y coordinate style will be added to the prompt. Wo that LLM can master more details and output the correct code.
+
+        \subsubsection{Get user's needs}
+            Read users' input of what LLM they want to use, and what query they want to make. Integrated these information into prompts to different LLM.
+        
+        \subsubsection{Link LLM}
+            According to users' choice, link LLMs by the API key they inputted. Send prompts to each LLM and get the answer code.
+
+        \subsubsection{Draw the charts}
+            Draw charts based on the answer code from different LLM. Arrange and display these charts on the webpage.
+
     \subsection{Product Description}
+            In this program, a web based app will be made to carry all functions. The web app contains the following parts:
+            \subsubsection{Dataset viewer and selection}
+            Users can use this module to choose different datasets, preview the data rows. Moreover, users can use this module to upload their own datasets.
+
+            \subsubsection{LLM setting and selection}
+            Users use this module to control LLM configuration, such as turn on or off some LLMs, and manage API keys.
+
+            \subsubsection{Query input}
+            Users utilize this module to communicate with LLMs using natural language to describe the chart they want.
+
+            \subsubsection{Chart viewer}
+            This module shows the data visualization charts output from different LLMs. 
+
     \subsection{Algorithms}
+    No specific algorithms in this project. All the algorithms are used in LLMs, which act as a black box to this project.
+
     \subsection{Implementation}
+        \subsubsection{Modules}
+            \paragraph{Front end}
+                A simple webpage will be made using streamlit framework. Most functions will be arranged in a single page to keep the minimalist user experience.
+
+                On the left, there's a sidebar to hold dataset selection and LLM setting part. Data rows in dataset will shown in a new tab based on users' needs.
+
+                On the right, the upper is the query input part. And the lower part is used for show charts.
+
+            \paragraph{Propmt engineering}
+                Many string manipulation works will be done in this part. We'll use python as coding language. As for data preprocessing, Pandas is used to extract data from .csv files.
+
+            \paragraph{Data visualization}
+                Matplotlib is used to create charts. The script that generates the image comes from the output of the LLMs.
+
+        \subsubsection{Weekly Deliverables}
+            \paragraph{Week 3: Project familiarization and task division}
+                \begin{itemize}
+                    \item Read related paper and library document, get familiar with the logic.
+                    \item Divide modules developing tasks to each team members.
+                \end{itemize}
+
+            \paragraph{Week 4: Preparation and Test}
+                \begin{itemize}
+                    \item Test LLM apis
+                    \item Test ralated libararies.
+                \end{itemize}
+
+            \paragraph{Week 5: Front-end and CSV reading}
+                \begin{itemize}
+                    \item Finish webpage front-end coding work.
+                    \item Finish the CSV reading process.
+                \end{itemize}
+
+            \paragraph{Week 6: Prompt engineering}
+                \begin{itemize}
+                    \item Determine the prompt engineering rules.
+                    \item Complete the process of prompt splicing.
+                    \item obtaining the drawing code from LLM.
+                \end{itemize}
+
+            \paragraph{Week 7: Drawing adjustment}
+                \begin{itemize}
+                    \item Adjust prompt format.
+                    \item Adjust drawing format.
+                \end{itemize}
+
+            \paragraph{Week 8: Use case test}
+                \begin{itemize}
+                    \item Test with different use case.
+                    \item fix bugs.
+                \end{itemize}
+
+            \paragraph{Week 9: Use case test}
+                \begin{itemize}
+                    \item Test with more use case.
+                \end{itemize}
+
+            \paragraph{Week 10: Presentation}
+                \begin{itemize}
+                    \item Organize data and documents.
+                    \item Prepare presentation.
+                \end{itemize}
+
+
     \subsection{Methodology}
+        \begin{itemize}
+            \item Languages: Python
+            \item Libraries: Pandas, Streamlit, Matplotlib
+            \item LLMs: ChatGPT 4o mini, 4o, o1; NL4DV; ncNET and YOLOPandas
+            \item APIs: LLM APIs for natural language processing 
+        \end{itemize}
+
+
 
 
 
