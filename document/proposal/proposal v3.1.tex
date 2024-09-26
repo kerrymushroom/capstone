@@ -1,0 +1,254 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+\begin{document}
+
+\title{Comparing the Performance of LLM-based Data Visualization Methods in Chat2VIS\\}
+
+\author{
+    \IEEEauthorblockN{Dewei Tan}
+    \IEEEauthorblockA{
+        \textit{Master of Science in Applied Computer Science} \\
+        \textit{Fairleigh Dickinson University}\\
+        Vancouver, Canada \\
+        d.tan@student.fdu.edu \\
+        ID: 2093688 \\
+    }
+
+    \\
+    \IEEEauthorblockN{Zihuan Zhu}
+    \IEEEauthorblockA{
+        textit{Master of Science in Applied Computer Science} \\
+        \textit{Fairleigh Dickinson University}\\
+        Vancouver, Canada \\
+        z.zhu2@student.fdu.edu \\
+        ID: 2086903 \\
+    }
+
+    \\
+    \IEEEauthorblockN{Jing Li}
+    \IEEEauthorblockA{
+        \textit{Master of Science in Applied Computer Science} \\
+        \textit{Fairleigh Dickinson University}\\
+        Vancouver, Canada \\
+        j.li8@student.fdu.edu\\
+        ID: 2091325
+    }
+
+    \and
+    \IEEEauthorblockN{Xiangjun Li}
+    \IEEEauthorblockA{
+        \textit{Master of Science in Applied Computer Science} \\
+        \textit{Fairleigh Dickinson University}\\
+        Vancouver, Canada \\
+        x.li3@student.fdu.edu \\
+        ID: 2092016 \\
+    }
+
+    \\
+    \IEEEauthorblockN{Lina Gu}
+    \IEEEauthorblockA{
+        \textit{Master of Science in Applied Computer Science} \\
+        \textit{Fairleigh Dickinson University}\\
+        Vancouver, Canada \\
+        l.gu@student.fdu.edu \\
+        ID: 2088991 \\
+    }
+}
+
+\maketitle
+
+\begin{abstract}
+    Visualizations from vague human language has long been challenges for natural language processing (NLP). During Natural Language Text-Generated Data Visualization (NL2VIS) system development, there are growing needs for non-experts to interpret and visualize data accurately and informatively. Our project aims to offer solutions by extending Chat2VIS study. We would incorporate a broader range of LLMs such as ChatGPT (4o Mini, 4o, o1), YoloPandas, offering a detailed comparison with prior NL4DV and ncNet systems. Through an increased number of datasets, comprehensive case studies and ambiguous queries with no specified chart types, we examine and compare the performance differences of these models, contrasting their accuracy and efficiency, paving the way for further studies. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+    large language models, visualizations from natural language, ChatGPT, natural language  interfaces.
+\end{IEEEkeywords}
+
+\section{Introduction}
+\subsection{Problem Statement}
+Natural language processing (NLP) has long been dealing with the complexities of human language, particularly in the domains of natural language understanding (NLU) \cite{yenduri2024gpt}. One important application of NLP is Natural Language to Data Visualization (NL2VIS), where natural language queries are transformed into meaningful data visualizations. Data visualization researches are putting great efforts to find new approaches to realize easy and direct conversion, but there are gaps in this domain and ongoing challenges. 
+
+\subsection{Research Importance}
+NL2VIS researchers image the scenario where users ask question like "compare prices of the product in different business" and obtain a bar chart displaying the difference. Such implement is particularly beneficial for users who lack expertise in graphical data analysis but need quick and accurate visual representations of complex datasets. Workable Natural Language Interfaces (NLIs) not only reach a wider range of users but also allow beginners to interact with complex data in a natural and user-friendly way.
+
+\subsection{Research Challenges}
+The ability of machines to accurately comprehend and generate language poses significant challenges, owing to the inherent ambiguity, variability, and context-dependence of human communication. Machines are also required to know user's intent even with mistakenly written questions. 
+Most current NL2VIS systems rely on statistical parsers, limiting them to handling only simple queries. Although advanced deep learning models have their place in other NLP tasks, they are not widely applied to NL2VIS, primarily due to the lack of large-scale labeled data \cite{luo2021nvbench} and computational costs that are essential for supporting these systems. This gap creates great difficulties in developing more flexible and powerful NL2VIS systems.
+
+\subsection{New solution}
+The advent of large language models like ChatGPT by OpenAI has marked a significant milestone in contextual visualization. These models demonstrated remarkable capabilities in NLP tasks including conversational agents, text generation, and summarization \cite{ray2023chatgpt}. They excel in terms of automation, flexibility, and contextual understanding. The introduction of LLMs into NL2VIS enhances complex natural language queries processing and expands the flexibility of visual outputs. 
+\subsection{Project Contribution}
+On the basis of the Chat2VIS platform presented by Maddigan et al. \cite{maddigan2023chat2vis}, our project adopts ChatGPT (4o mini, 4o, o1), NL4DV, ncNet, and YoloPandas as NL2VIS system candidates. We evaluate and compares the performance differences between these models using an expanded collection of datasets and complex queries not confined to any chart types, providing insights for more sophisticated visualizations systems.
+
+
+
+\section{Related Work}
+\subsection{Existing NL2VIS Solutions}
+NL2VIS is built on NL modeling solutions, which can be divided into two kinds: traditional symbolic NL processing models and modern deep learning models.
+
+Traditional NL mapping systems, such as Deepeye \cite{luo2018deepeye}, are built upon symbolic methods. These systems use pre-defined rules and probabilistic grammar-based methods to parse NL. But these hand-crafted models often lack accuracy and flexibility, require more resources, and can be hard to use.
+
+Recent studies, such as open-source NL4DV \cite{narechania2021nl4dv}, although using symbolic NLP methods, relies on semantic parsers like Stanford CoreNLP \cite{manning2014stanford} to improve accuracy. This toolkit allows users without prior experience to utilize NL2VIS.
+
+The second type of NL2VS models is deep-learning end-to-end model. These models integrate language understanding, reasoning, and chart creation into one system.
+
+ncNet \cite{luo2022natural}, trained with the nvBench \cite{luo2021nvbench} dataset, uses transformer-based models. It processes natural language query and accepts an optional chart template to restrict the results. This method has shown good accuracy. However, these advanced systems rely on users explicitly deciding which types of charts to create.
+
+\subsection{Advantages of New LLMs Solution}
+In recent years, researchers have begun to analyze the performance of ChatGPT-3 and ChatGPT-4 in generating charts \cite{vazquez2024are}. Compared to previous methods, LLMs for visualizations offer a simpler and more solution through effective prompt engineering and code encapsulation. They keep accurate even when queries are underspecified or highly vague. Additionally, as LLM accuracy continues to evolve, their visualisation inference abilities will also grow.
+
+The LLM solution provides capabilities for automated chart selection, good at choosing the correct charts and rendering them appropriately, better than earlier methods.
+
+Considering LLM prompts can be designed to obtain only limited information from datasets, data security concerns are greatly fixed and privacy is maintained.
+
+\subsection{Study Limitations and Our Improvement}
+The authors in Chat2VIS study \cite{maddigan2023chat2vis} examined GPT models including GPT-3, CodeX, ChatGPT. Our project would compare the capabilities of a wider range of LLMs, including GPT-4o mini, GPT-4o and GPT-o1, YoloPandas \cite{yolopandasdevelopersyolopandas} for NL2VIS tasks and contrasts the performances with prior NL4DV and ncNet studies in terms of accuracy and efficiency.
+
+The authors’ research included only six case studies for visualizations. Our project would include more datasets to examine the LLM-based NL2VIS system. We would analyze these datasets with more sophisticated queries, and go beyond NVBench’s built-in seven chart types, achieving for a detailed comparison with previous studies.
+
+
+\section{Design and Implementation}
+\subsection{Solution Strategy}
+To use LLMs to visualize data by natural language query, the whole project is divided into several steps. For individual LLM, data processing methods may vary.
+
+This project would realize visualizations in two ways. The first one is LLMs such as ChatGPT, which are not specifically developed for NL2VIS. Hence, extra prompt engineering should be done to restrict their output.
+
+The second apporach uses data visualization tools like NL4DV, nvBench(based on ncNet). Certain data processing modules may have been integrated inside these tools\cite{narechania2021nl4dv,luo2021nvbench}. A more feasible way to deal with data is to use built-in functions. 
+
+Generally, the project's workflow is divided into the following steps:   
+
+\subsubsection{Dataset selection}
+A dataset is a basic premise in the program. In this project, users can either use example dataset or upload their own datasets to visualize data.
+
+By default, the project contains some default example datasets including Movies, Housing, Cars and more. User can simply choose them by clicking corresponding radio buttons. These datasets come from the original paper.
+
+When using customized dataset, CSV files could be uploaded to the project by clicking the "upload" button. After fully uploaded, users can see their data on the webpage.
+
+\subsubsection{Dataset preprocessing}
+Pandas is imported to deal with CSV files. At this step, every column's title and its data format is been recorded. This information will become part of the prompt sent to LLM to get the right code.
+
+\subsubsection{Chart formatting}
+Some formatting and drawing instructions will be added. In this step, required information including drawing library and python version; chart style information such as chart title and X, Y coordinate style will be added to the prompt. Wo that LLM can master more details and output the correct code.
+
+\subsubsection{User needs elicitation}
+Read users' input of what LLM they want to use, and what query they want to make. Integrated these information into prompts to different LLM.
+
+\subsubsection{LLM integration}
+According to users' choice, link LLMs by the API key they inputted. Send prompts to each LLM and get the answer code.
+
+\subsubsection{Charts creation}
+Draw charts based on the answer code from different LLM. Arrange and display these charts on the webpage.
+
+\subsection{Product Description}
+In this program, a web based app will be made to carry these functions. The web application contains the following parts:
+
+\subsubsection{Dataset viewer and selection}
+Users can use this module to choose different datasets, preview the data rows. Moreover, users can use this module to upload their own datasets.
+
+\subsubsection{LLM setting and selection}
+Users use this module to control LLM configuration, such as turn on or off some LLMs, and manage API keys.
+
+\subsubsection{Query input}
+Users utilize this module to communicate with LLMs using natural language to describe the chart they want.
+
+\subsubsection{Chart viewer}
+This module shows the data visualization charts output from different LLMs. 
+
+\subsection{Algorithms}
+No new algorithms are proposed in this project. Opaque algorithms work in black-box LLMs.
+
+\subsection{Implementation}
+\subsubsection{Modules}
+\paragraph{Front end}
+A webpage will be made using streamlit framework. Most functions will be arranged in a single page to keep the minimalist user experience.
+
+On the left, there's a sidebar to hold dataset selection and LLM setting part. Data rows in dataset will shown in a new tab based on users' needs.
+
+On the right, the upper is the query input part. And the lower part is used for show charts.
+
+\paragraph{Propmt engineering}
+String manipulation works will be done for better visualization. For data preprocessing, Pandas is used to extract data from CSV files.
+
+\paragraph{Data visualization}
+Matplotlib is used to create charts. The script that generates the image comes from the output of the LLMs.
+
+\subsubsection{Weekly Deliverables}
+\paragraph{Week 3: Project disscusion and task division}
+\begin{itemize}
+	\item Read related paper and library document, understand article logics.
+	\item Assign modules and tasks to each team members.
+\end{itemize}
+
+\paragraph{Week 4: Preparation and Test}
+\begin{itemize}
+	\item Test LLM APIs.
+	\item Test ralated libararies.
+\end{itemize}
+
+\paragraph{Week 5: Front-end and CSV codes}
+\begin{itemize}
+    \item Apply LLM APIs ready.
+	\item Finish webpage front-end codes.
+	\item Achieve CSV reading function.
+\end{itemize}
+
+\paragraph{Week 6: Prompt engineering}
+\begin{itemize}
+	\item Determine the prompt engineering rules.
+	\item Test prompts for different LLMs.
+	\item Examine the chart code from LLMs.
+\end{itemize}
+
+\paragraph{Week 7: Drawing adjustment}
+\begin{itemize}
+    \item Adjust drawing format.
+	\item Adjust prompt format accordingly.
+\end{itemize}
+
+\paragraph{Week 8: Use case test}
+\begin{itemize}
+	\item Test different use case.
+	\item Fix bugs.
+\end{itemize}
+
+\paragraph{Week 9: Data replication}
+\begin{itemize}
+	\item Reproduce the article results.
+\end{itemize}
+
+\paragraph{Week 10: Presentation}
+\begin{itemize}
+	\item Organize data and documents.
+	\item Prepare presentation.
+\end{itemize}
+
+
+\subsection{Methodology}
+\begin{itemize}
+	\item Languages: Python
+	\item Libraries: pandas, numpy, streamlit, matplotlib
+	\item LLMs: ChatGPT (4o mini, 4o, o1); NL4DV; ncNet and YoloPandas
+	\item APIs: LLM APIs for natural language processing 
+\end{itemize}       
+
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+
+
+
+\end{document}
