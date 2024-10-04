@@ -54,12 +54,8 @@ def get_available_models():
         return []
 
 
-def get_primer(df_dataset, df_name):
-    # Primer function to take a dataframe and its name
-    # and the name of the columns
-    # and any columns with less than 20 unique values it adds the values to the primer
-    # and horizontal grid lines and labeling
-    # need to give exist path
+def getTemplateCode(df_dataset, df_name):
+   
     primer_desc = "Use a dataframe called df from '../../project/EnhancedChat2VIS/data/movies.csv' with columns '" \
                   + "','".join(str(x) for x in df_dataset.columns) + "'. "
     for i in df_dataset.columns:
@@ -85,7 +81,7 @@ datasets = {}
 # need to give exist path
 datasets["Movies"] = pd.read_csv("../../project/EnhancedChat2VIS/data/movies.csv")
 
-primer1, primer2 = get_primer(datasets["Movies"], 'datasets["Movies"]')
+primer1, primer2 = getTemplateCode(datasets["Movies"], 'datasets["Movies"]')
 print(primer1)
 print(primer2)
 
