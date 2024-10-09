@@ -1,9 +1,11 @@
 import streamlit as st
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
 from loadpic_NL4DV import *
 import requests
+from loadYoloPandas import use_yolopandas
 
 # The models that can be used, name: code
 availableLLM = {
@@ -17,7 +19,6 @@ availableLLM = {
 }
 
 # Example data URLs
-# TODO: Change ways to choose example data
 exampleData = {
     "cars": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/cars.csv",
     "colleges": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/colleges.csv",
@@ -98,7 +99,7 @@ with (st.sidebar):
     # Model selection checkboxes
     for llmName, llmCode in availableLLM.items():
         if (('ChatGPT' in llmName and chatGptApiKey == "") or
-                ('yolo' in llmName and chatGptApiKey == "") or ('NL4DV 2.0' in llmName and chatGptApiKey == "")):
+                ('yolo' in llmName and chatGptApiKey == "") or ('NL4DV 3.0' in llmName and chatGptApiKey == "")):
             llmChoice[llmCode] = st.checkbox(llmName, disabled=True, help="Please enter ChatGPT API key first.")
         elif 'Gemini' in llmName and geminiApiKey == "":
             llmChoice[llmCode] = st.checkbox(llmName, disabled=True, help="Please enter Gemini API key first.")
@@ -108,7 +109,7 @@ with (st.sidebar):
     # Dataset source selection
     st.markdown("### Choose your dataset")
 
-    # Choose
+    # Choose example or custom dataset
     selected = option_menu(None, ['Custom', 'Example'],
                            icons=['file-earmark-arrow-up-fill', 'clipboard-data-fill'],
                            orientation="horizontal")
@@ -162,13 +163,34 @@ user_input = st.text_area("Input prompts")
 # Button to run LLM
 if st.button('Go...', key='submit'):
     if chosenFileName == '':
-        st.write("Please upload a CSV file")
+        st.error("ERROR: Please upload or choose a CSV file")
+    elif llmChoice == {}:
+        st.error("ERROR: Please choose a model")
     else:
-        # Placeholder for LLM processing (to be implemented)
-        st.write(f"Running model on: {user_input}")
+        st.markdown(f"##### Running model on: {user_input}")
+
+        # Divide the screen into columns based on the number of models selected
+        columns = st.columns(min(len(llmChoice), 3))
+        col_index = 0
+
         if llmChoice["nl4dv_3"]:
-            print("running nl4dv_3")
-            st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+            with columns[col_index]:
+                st.markdown("#### NL4DV 3.0")
+                st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+            col_index += 1
+
+        if llmChoice["nl4dv_2"]:
+            with columns[col_index]:
+                st.markdown("#### NL4DV 2.0")
+                st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
+            col_index += 1
+
+        # TODO: Yolopandas result to be displayed, the existing code is not working.
+        if llmChoice["YOLOPandas"]:
+            with columns[col_index]:
+                st.markdown("#### YOLOPandas")
+                st.pyplot.show(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
+            col_index += 1
 
 # Display dataset as a table
 if 'isExampleDataset' in st.session_state and st.session_state['isExampleDataset']:
