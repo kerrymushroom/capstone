@@ -1,0 +1,29 @@
+Name,Control,Region,Locale,Admission Rate,ACT Median,SAT Average,Population,Average Cost,Expenditure,Average Faculty Salary,Median Debt,Median Family Income,Median Earnings
+Harvard University,Private,New England,Mid-size City,6,34,1501,7278,57950,47083,17861,7500,33323.5,77600
+Stanford University,Private,Far West,Large Suburb,6,33,1466,6980,58408,88200,19862,11500,53935.5,76500
+Columbia University in the City of New York,Private,Mid Atlantic,Large City,7,33,1471,7970,61540,78147,15706,17125,30939,69500
+Princeton University,Private,Mid Atlantic,Large Suburb,7,33,1495,5234,55430,48021,15711,7500,50686,66500
+Yale University,Private,New England,Mid-size City,7,34,1497,5422,59320,106214,16042,12000,45652.5,70600
+Massachusetts Institute of Technology,Private,New England,Mid-size City,8,34,1503,4510,57010,58223,15617,13000,79076,86900
+Brown University,Private,New England,Mid-size City,9,32,1425,6182,58140,30823,13381,15164,84559,54400
+University of Chicago,Private,Great Lakes,Large City,9,34,1504,5697,62425,74864,16589,17610,53224,58700
+Dartmouth College,Private,New England,Remote Town,10,32,1446,4154,61398,25268,13143,10695.5,78815,60300
+Claremont McKenna College,Private,Far West,Large Suburb,12,31,1397,1311,60065,26268,9388,12086,88986.5,55600
+University of Pennsylvania,Private,Mid Atlantic,Large City,12,32,1442,10606,59600,52081,15460,19500,62169,73200
+Adventist University of Health Sciences,Private,Southeast,Mid-size City,13,19,884,2064,21358,8382,6539,15236,49657.5,51800
+College of the Ozarks,Private,Great Plains,Distant Town,13,23,1050,1513,26813,9444,6792,0,32674.5,29300
+Duke University,Private,Southeast,Mid-size City,13,32,1444,6501,59528,51653,14288,6569,73265,69400
+Vanderbilt University,Private,Southeast,Large City,13,33,1475,6794,59890,76995,12871,13000,74999.5,54400
+Amherst College,Private,New England,Large Suburb,14,32,1434,1785,59060,23275,11690,10453,85922,54000
+Pomona College,Private,Far West,Large Suburb,14,33,1454,1587,57014,34930,12326,8561,63215,43100
+Swarthmore College,Private,Mid Atlantic,Large Suburb,14,33,1442,1524,58481,29924,12138,17718.5,89473,41300
+Bowdoin College,Private,New England,Fringe Town,15,32,1423,1789,58200,26266,10803,18000,89780.5,48600
+Northwestern University,Private,Great Lakes,Small City,15,33,1458,8855,60729,34438,14525,18234,71885.5,58100
+Pitzer College,Private,Far West,Large Suburb,15,0,0,1081,59266,24408,10084,14824,61408,34700
+Cornell University,Private,Mid Atlantic,Small City,16,32,1422,14309,59572,23140,13820,11500,81957,65000
+Washington University in St Louis,Private,Great Plains,Large Suburb,16,33,1474,6851,62594,97613,13286,19500,77947.5,58300
+Georgetown University,Private,Mid Atlantic,Large City,17,31,1398,7261,59900,29282,12851,17125,60247,76200
+Middlebury College,Private,New England,Distant Town,17,32,1391,2466,59200,23214,10599,17777.5,60997.5,49100
+Rice University,Private,Southwest,Large City,17,33,1454,3920,52242,39651,13468,7727,71258,56500
+Williams College,Private,New England,Fringe Town,17,32,1439,2051,59412,39164,12027,11248,88403.5,46400
+Johns Hopkins University,Private,Mid Atlantic,Large City,18,32,1418,5932,58980,75570,10922,17500,57761.5,64400
