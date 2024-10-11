@@ -11,8 +11,10 @@ def use_nl4dv_3(url, api_key, query):
     # Execute the query
     output = nl4dv_instance.analyze_query(query)
     print(output)
-
-    return output["visList"][0]["vlSpec"]
+    if output["visList"] is None or output["visList"] == []:
+        raise ValueError("Failed to generate visualization")
+    else:
+        return output["visList"][0]["vlSpec"]
 
 
 # NL4DV semantic-parsing mode
@@ -24,4 +26,7 @@ def use_nl4dv_2(url, query):
     output = nl4dv_instance.analyze_query(query)
     print(output)
 
-    return output["visList"][0]["vlSpec"]
+    if output["visList"] is None or output["visList"] == []:
+        raise ValueError("Failed to generate visualization")
+    else:
+        return output["visList"][0]["vlSpec"]

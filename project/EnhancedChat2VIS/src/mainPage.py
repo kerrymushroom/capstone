@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
 from loadpic_NL4DV import *
 import requests
-from loadYoloPandas import use_yolopandas
+from loadpic_YoloPandas import use_yolopandas
 
 # The models that can be used, name: code
 availableLLM = {
@@ -176,13 +176,19 @@ if st.button('Go...', key='submit'):
         if llmChoice["nl4dv_3"]:
             with columns[col_index]:
                 st.markdown("#### NL4DV 3.0")
-                st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+                try:
+                    st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+                except Exception as e:
+                    st.error(f"Error: {e}")
             col_index += 1
 
         if llmChoice["nl4dv_2"]:
             with columns[col_index]:
                 st.markdown("#### NL4DV 2.0")
-                st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
+                try:
+                    st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
+                except Exception as e:
+                    st.error(f"Error: {e}")
             col_index += 1
 
         # TODO: Yolopandas result to be displayed, the existing code is not working.
