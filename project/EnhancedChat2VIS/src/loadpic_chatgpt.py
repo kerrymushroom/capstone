@@ -1,5 +1,5 @@
 
-import openai as client
+import openai
 import pandas as pd
 import os
 exampleData = {
@@ -13,28 +13,24 @@ exampleData = {
     "movies": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/movies.csv"
 }
 
-def use_chatgpt(url, api_key, query):
+def use_chatgpt(url, api_key, query, type):
     os.environ['OPENAI_API_KEY'] = api_key
+    openai.api_key = api_key
 
-    # need to give exist path
     csv = pd.read_csv(url)
     primer1, primer2 = getTemplateCode(csv, url)
 
     question_to_ask = format_question(primer1, primer2, query)
 
     print(question_to_ask)
-
     # use model to generate some code from gpt
-    result = run_gpt(question_to_ask, "gpt-4o-mini")
+    result = run_gpt(question_to_ask, type)
     print(result)
-
     #
     cleaned_code = result.lstrip('```python')
     cleaned_code = cleaned_code.rstrip('```')
-    print(cleaned_code)
     exec(cleaned_code)
-
-    return result
+    return cleaned_code
 def format_question(primer_desc,primer_code , question):
     # Fill in the model_specific_instructions variable
     instructions = ""
@@ -70,52 +66,57 @@ def getTemplateCode(df_dataset, csv_url):
     pimer_code += f"df = {df_name}.copy()\n"  # Use the dynamically extracted df_name
 
     return primer_desc, pimer_code
+
 def run_gpt(question_to_ask, model_type):
     llm_response = None
-    if model_type == "gpt-4o-mini" or model_type == "gpt-3.5-turbo":
-        # Run OpenAI ChatCompletion API
-        task = "Generate Python Code Script."
-        if model_type == "gpt-4o-mini":
-            # Ensure GPT-4 does not include additional comments
-            task = task + " The script should only include code, no comments. I need a executable code.Do not append any other can not execute text"
-        response = client.chat.completions.create(
-            model=model_type,
-            messages=[
-                {"role": "system", "content": task},
-                {"role": "user", "content": question_to_ask}
-            ]
-        )
-        llm_response = response.choices[0].message.content
+    supported_models = ["gpt-4o", "gpt-4o-mini"]
+    if model_type in supported_models:
+        # 设置任务描述
+        task = "Generate Python Code Script.The script should only include code, no comments. I need executable code. Do not append any other non-executable text."
+        try:
+            # 调用 OpenAI ChatCompletion API
+            response = openai.ChatCompletion.create(
+                model=model_type,
+                messages=[
+                    {"role": "system", "content": task},
+                    {"role": "user", "content": question_to_ask}
+                ]
+            )
+            llm_response = response['choices'][0]['message']['content']  # 提取返回的内容
+        except Exception as e:
+            print("An error occurred while calling the OpenAI API:", e)
+            return ""
     else:
         print(f"Model '{model_type}' is not supported.")
         return ""
+
     return llm_response
-#case1
-use_chatgpt(exampleData["department_store"],
-            "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",
-            "What is the highest price of product, grouped by product type? Show a bar chart, and display by the names in desc.")
-
-use_chatgpt(exampleData["colleges"],
-            "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",
-            "Show debt and earnings for Public and Private colleges.")
-
-
-use_chatgpt(exampleData["energy_production"],
-            "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",
-            "What is the trend of oil production since 2004?")
-
-
-use_chatgpt(exampleData["customers_and_products_contacts"],
-            "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",
-            "Show the number of products with price higher than 1000 or lower than 500 for each product name in a bar chart, and could you rank y-axis in descending order?")
+# #case1
+# use_chatgpt(exampleData["department_store"],
+#             "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",
+#             "What is the highest price of product, grouped by product type? Show a bar chart, and display by the names in desc.")
+#
+# use_chatgpt(exampleData["colleges"],
+#             "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",
+#             "Show debt and earnings for Public and Private colleges.")
+#
+#
+# use_chatgpt(exampleData["energy_production"],
+#             "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",
+#             "What is the trend of oil production since 2004?")
+#
+#
+# use_chatgpt(exampleData["customers_and_products_contacts"],
+#             "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",
+#             "Show the number of products with price higher than 1000 or lower than 500 for each product name in a bar chart, and could you rank y-axis in descending order?")
+#
+#
+# use_chatgpt(exampleData["movies"],
+#             "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",
+#             "draw the numbr of movie by gener")
 
 
 use_chatgpt(exampleData["movies"],
             "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",
-            "draw the numbr of movie by gener")
-
-
-use_chatgpt(exampleData["movies"],
-            "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",
-            "tomatoes in movies")
-
+            "tomatoes",
+            "gpt-4o")
