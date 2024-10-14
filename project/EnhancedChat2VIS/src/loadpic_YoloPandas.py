@@ -34,8 +34,3 @@ def use_yolopandas(url, api_key, query):
         return None
 
     return result
-
-    product_df = pd.read_csv(url)
-    result = product_df.llm.query(query, yolo=True)
-
-    return result
