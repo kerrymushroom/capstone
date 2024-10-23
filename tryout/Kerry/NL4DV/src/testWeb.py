@@ -34,6 +34,7 @@ dt2 = {'query_raw': 'show average MPG of different Origin', 'query': 'show avera
        'attributeMapping': {'MPG': {'mpg': 1}, 'Origin': {'origin': 1}}, 'followUpConfidence': None,
        'ambiguity': {'attribute': {}, 'value': {}}, 'dialogId': '0', 'queryId': '0'}
 
+
 st.write("show average mpg of different origin")
 col1, col2 = st.columns([2, 1])
 with col1:
