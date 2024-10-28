@@ -24,7 +24,8 @@ def use_yolopandas(url, api_key, query):
         # Check if result is an instance of matplotlib Axes
         if isinstance(result, plt.Axes):
             print("The result is a matplotlib Axes object.")
-            plt.show()  # Show the plot if it is an Axes object
+            figResult = result.figure
+            return figResult
         else:
             print("The result is not a matplotlib Axes object.")
             return None
@@ -32,5 +33,3 @@ def use_yolopandas(url, api_key, query):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
-
-    return result

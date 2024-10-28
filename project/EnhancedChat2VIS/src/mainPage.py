@@ -195,7 +195,7 @@ if st.button('Go...', key='submit'):
         if llmChoice["YOLOPandas"]:
             with columns[col_index]:
                 st.markdown("#### YOLOPandas")
-                st.pyplot.show(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
+                st.pyplot(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
             col_index += 1
 
 # Display dataset as a table

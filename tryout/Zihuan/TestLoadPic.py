@@ -1,7 +1,7 @@
 from yolopandas import pd
 import matplotlib.pyplot as plt
 import os
-# import streamlit as st
+import streamlit as st
 
 def use_yolopandas(url, query):
     # Set OpenAI API key
@@ -25,7 +25,8 @@ def use_yolopandas(url, query):
         # Check if result is an instance of matplotlib Axes
         if isinstance(result, plt.Axes):
             print("The result is a matplotlib Axes object.")
-            plt.show()  # Show the plot if it is an Axes object
+            fig = result.figure
+            return fig
         else:
             print("The result is not a matplotlib Axes object.")
             return None
@@ -35,13 +36,18 @@ def use_yolopandas(url, query):
         print(f"An error occurred: {str(e)}")
         return None
     
-    return result
 
 # Case study 1
-# url = "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/department_store.csv"
-# query = "What is the highest price of product, grouped by product type? Show a bar chart, and display by the names in desc."
-# print(type(use_yolopandas(url, query)))
+url = "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/department_store.csv"
+query = "What is the highest price of product, grouped by product type? Show a bar chart, and display by the names in desc."
+fig = use_yolopandas(url, query)
 
+if fig is not None:
+    st.title('My Streamlit App with Existing Axes Data')
+    st.pyplot(fig)  # Display the figure in Streamlit
+else:
+    st.write("No valid plot was returned.")
+# plt.show()
 # Case study 2
 # url = "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/colleges.csv"
 # query = "Show debt and earnings for Public and Private colleges."
@@ -63,6 +69,6 @@ def use_yolopandas(url, query):
 # print(type(use_yolopandas(url, query)))
 
 # Case study 6
-url = "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/movies.csv"
-query = "tomatoes"
-print(type(use_yolopandas(url, query)))
+# url = "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/movies.csv"
+# query = "tomatoes"
+# print(type(use_yolopandas(url, query)))
