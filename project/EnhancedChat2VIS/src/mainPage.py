@@ -6,6 +6,7 @@ from streamlit_option_menu import option_menu
 from loadpic_NL4DV import *
 import requests
 from loadpic_YoloPandas import use_yolopandas
+from loadpic_gemini import use_gemini
 
 # The models that can be used, name: code
 availableLLM = {
@@ -161,6 +162,8 @@ st.markdown("## What would you like to visualize?")
 user_input = st.text_area("Input prompts")
 
 # Button to run LLM
+
+
 if st.button('Go...', key='submit'):
     if chosenFileName == '':
         st.error("ERROR: Please upload or choose a CSV file")
@@ -171,31 +174,63 @@ if st.button('Go...', key='submit'):
 
         # Divide the screen into columns based on the number of models selected
         columns = st.columns(min(len(llmChoice), 3))
+        columns2 = st.columns(min(len(llmChoice), 3))
         col_index = 0
 
         if llmChoice["nl4dv_3"]:
-            with columns[col_index]:
-                st.markdown("#### NL4DV 3.0")
-                try:
-                    st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
-                except Exception as e:
-                    st.error(f"Error: {e}")
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### NL4DV 3.0")
+                    try:
+                        st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+                    except Exception as e:
+                        st.error(f"Error: {e}")
+            else:
+                with columns2[col_index-3]:
+                    st.markdown("#### NL4DV 3.0")
+                    try:
+                        st.vega_lite_chart(use_nl4dv_3(chosenFileURL, chatGptApiKey, user_input))
+                    except Exception as e:
+                        st.error(f"Error: {e}")
             col_index += 1
 
         if llmChoice["nl4dv_2"]:
-            with columns[col_index]:
-                st.markdown("#### NL4DV 2.0")
-                try:
-                    st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
-                except Exception as e:
-                    st.error(f"Error: {e}")
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### NL4DV 2.0")
+                    try:
+                        st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
+                    except Exception as e:
+                        st.error(f"Error: {e}")
+            else:
+                with columns2[col_index-3]:
+                    st.markdown("#### NL4DV 2.0")
+                    try:
+                        st.vega_lite_chart(use_nl4dv_2(chosenFileURL, user_input))
+                    except Exception as e:
+                        st.error(f"Error: {e}")
             col_index += 1
 
-        # TODO: Yolopandas result to be displayed, the existing code is not working.
         if llmChoice["YOLOPandas"]:
-            with columns[col_index]:
-                st.markdown("#### YOLOPandas")
-                st.pyplot(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### YOLOPandas")
+                    st.pyplot(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
+            else:
+                with columns2[col_index-3]:
+                    st.markdown("#### YOLOPandas")
+                    st.pyplot(use_yolopandas(chosenFileURL, chatGptApiKey, user_input))
+            col_index += 1
+
+        if llmChoice["gemini"]:
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### Gemini")
+                    st.vega_lite_chart(use_gemini(chosenFileURL, chatGptApiKey, user_input))
+            else:
+                with columns2[col_index - 3]:
+                    st.markdown("#### Gemini")
+                    st.vega_lite_chart(use_gemini(chosenFileURL, chatGptApiKey, user_input))
             col_index += 1
 
 # Display dataset as a table

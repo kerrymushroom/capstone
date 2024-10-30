@@ -34,13 +34,15 @@ dt2 = {'query_raw': 'show average MPG of different Origin', 'query': 'show avera
        'attributeMapping': {'MPG': {'mpg': 1}, 'Origin': {'origin': 1}}, 'followUpConfidence': None,
        'ambiguity': {'attribute': {}, 'value': {}}, 'dialogId': '0', 'queryId': '0'}
 
+#
+# st.write("show average mpg of different origin")
+# col1, col2 = st.columns([2, 1])
+# with col1:
+#     st.write("NL4DV 3.0")
+#     st.vega_lite_chart(dt["visList"][0]["vlSpec"])
+# with col2:
+#     st.write("NL4DV 2.0")
+#     st.vega_lite_chart(dt2["visList"][0]["vlSpec"])
 
-st.write("show average mpg of different origin")
-col1, col2 = st.columns([2, 1])
-with col1:
-    st.write("NL4DV 3.0")
-    st.vega_lite_chart(dt["visList"][0]["vlSpec"])
-with col2:
-    st.write("NL4DV 2.0")
-    st.vega_lite_chart(dt2["visList"][0]["vlSpec"])
+print (dt2.get('taskMap', {}))
 

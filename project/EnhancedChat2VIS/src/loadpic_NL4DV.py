@@ -10,7 +10,6 @@ def use_nl4dv_3(url, api_key, query):
 
     # Execute the query
     output = nl4dv_instance.analyze_query(query)
-    print(output)
     if output["visList"] is None or output["visList"] == []:
         raise ValueError("Failed to generate visualization")
     else:
@@ -24,7 +23,6 @@ def use_nl4dv_2(url, query):
 
     # Execute the query
     output = nl4dv_instance.analyze_query(query)
-    print(output)
 
     if output["visList"] is None or output["visList"] == []:
         raise ValueError("Failed to generate visualization")
