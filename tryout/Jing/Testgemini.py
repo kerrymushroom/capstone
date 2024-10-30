@@ -5,9 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 配置 Gemini API 密钥
-
 genai.configure(api_key="AIzaSyCLXMk4PNMrGXu3ltiB930Y2bq4h0gE6OY")
-
 
 # 定义 run_request 函数来调用 Gemini 模型
 def run_request(question_to_ask, model_type, key, alt_key):
@@ -31,7 +29,7 @@ def run_request(question_to_ask, model_type, key, alt_key):
     except Exception as e:
         # 捕捉并输出 API 请求中的错误信息
         print(f"Error during API request: {e}")
-
+        return ""  # 如果发生错误，返回一个空字符串，避免 NoneType 错误
 
 # 定义获取数据集的描述信息函数
 def get_primer(df_dataset, df_name):
@@ -54,7 +52,6 @@ def get_primer(df_dataset, df_name):
     primer_code += f"df={df_name}.copy()\n"
     return primer_desc, primer_code
 
-
 # 定义格式化问题的函数
 def format_question(primer_desc, primer_code, question, model_type):
     instructions = ""
@@ -62,7 +59,6 @@ def format_question(primer_desc, primer_code, question, model_type):
         instructions = "\nDo not use the 'c' argument in the plot function, use 'color' instead."
     primer_desc = primer_desc.format(instructions)
     return f'"""\n{primer_desc}{question}\n"""\n{primer_code}'
-
 
 # 定义 Streamlit 界面
 st.title("自然语言生成可视化 - 使用 Gemini 和 Streamlit")
@@ -81,14 +77,20 @@ model_count = len(selected_models)
 # 加载示例数据集
 if "datasets" not in st.session_state:
     datasets = {}
-    datasets["Movies"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/movies.csv")
+    datasets["Cars"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/cars.csv")
+    datasets["Colleges"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/colleges.csv")
+    datasets["Customers_Products"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/customers_and_products_contacts.csv")
+    datasets["Department_Store"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/department_store.csv")
+    datasets["Energy_Production"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/energy_production.csv")
     datasets["Housing"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/housing.csv")
+    datasets["Movies"] = pd.read_csv("https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/movies.csv")
+    
     st.session_state["datasets"] = datasets
 else:
     datasets = st.session_state["datasets"]
 
 # 数据集选择
-chosen_dataset = st.selectbox("选择一个数据集", list(datasets.keys()), key="chosen_dataset")  # 让用户选择数据集
+chosen_dataset = st.selectbox("选择一个数据集", list(datasets.keys()), key="chosen_dataset")
 
 # 生成可视化按钮
 if st.button("生成可视化", key="generate_button"):
@@ -97,12 +99,6 @@ if st.button("生成可视化", key="generate_button"):
     else:
         try:
             api_keys_entered = True
-
-            # 确保 API 密钥已经输入
-            if "Gemini-1.5" in selected_models:
-                if not gemini_key:
-                    st.error("Please enter a valid Gemini API key.")
-                    api_keys_entered = False
 
             if api_keys_entered:
                 # 动态生成列数，显示多个模型结果
@@ -119,10 +115,9 @@ if st.button("生成可视化", key="generate_button"):
                             # 格式化问题
                             question_to_ask = format_question(primer1, primer2, user_query, model_type)
                             # 调用模型生成答案
-                            answer = run_request(question_to_ask, available_models[model_type], key=gemini_key,
-                                                 alt_key=None)
-                            # 将生成的 Python 代码加到 primer2 之后
-                            answer = primer2 + answer
+                            answer = run_request(question_to_ask, available_models[model_type], key=gemini_key, alt_key=None)
+                            # 确保将 answer 转为字符串，避免 NoneType 错误
+                            answer = primer2 + str(answer)
                             print("Model: " + model_type)
                             print(answer)
                             # 创建空的图表区域并执行生成的 Python 代码
