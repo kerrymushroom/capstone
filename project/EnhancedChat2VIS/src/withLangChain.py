@@ -22,7 +22,7 @@ def useGemini(csv_url, question):
 
     agent = create_csv_agent(GoogleGenerativeAI(temprature=0, model="gemini-1.5-flash"), temp_file_path, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
     final = agent.run(question)
-    systemMessage = "Now you need to chrats. Use human's message to generate the vega-lite visualization json code, no other reply: "
+    systemMessage = "Now you need to create chrats. Use human's message to generate the vega-lite visualization json code, no other reply: "
     messages = [
         ("system", systemMessage),
         ("human", question + "I already got the data I need: " + final),
