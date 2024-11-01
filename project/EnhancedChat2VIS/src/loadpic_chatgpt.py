@@ -5,8 +5,7 @@ import os
 exampleData = {
     "cars": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/cars.csv",
     "colleges": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/colleges.csv",
-    "customers_and_products_contacts": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main"
-                                       "/customers_and_products_contacts.csv",
+    "customers_and_products_contacts": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/customers_and_products_contacts.csv",
     "department_store": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/department_store.csv",
     "energy_production": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/energy_production.csv",
     "housing": "https://raw.githubusercontent.com/frog-land/Chat2VIS_Streamlit/main/housing.csv",
@@ -22,15 +21,22 @@ def use_chatgpt(url, api_key, query, type):
 
     question_to_ask = format_question(primer1, primer2, query)
 
-    print(question_to_ask)
+    # print(question_to_ask)
     # use model to generate some code from gpt
     result = run_gpt(question_to_ask, type)
-    print(result)
+    # print(result)
     #
     cleaned_code = result.lstrip('```python')
     cleaned_code = cleaned_code.rstrip('```')
-    exec(cleaned_code)
-    return cleaned_code
+    generated_fig = None
+    try:
+        exec(cleaned_code, globals())
+        if 'fig' in globals():
+            generated_fig = globals()['fig']
+    except Exception as e:
+        print(f"Error executing generated code: {e}")
+    return generated_fig
+
 def format_question(primer_desc,primer_code , question):
     # Fill in the model_specific_instructions variable
     instructions = ""
@@ -116,7 +122,7 @@ def run_gpt(question_to_ask, model_type):
 #             "draw the numbr of movie by gener")
 
 
-use_chatgpt(exampleData["movies"],
-            "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",
-            "tomatoes",
-            "gpt-4o")
+# use_chatgpt(exampleData["movies"],
+#             "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",
+#             "tomatoes",
+#             "gpt-4o")
