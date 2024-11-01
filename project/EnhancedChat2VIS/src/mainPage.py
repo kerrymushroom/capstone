@@ -7,11 +7,12 @@ from loadpic_NL4DV import *
 import requests
 from loadpic_YoloPandas import use_yolopandas
 from loadpic_gemini import use_gemini
+from loadpic_chatgpt import use_chatgpt
 
 # The models that can be used, name: code
 availableLLM = {
-    "ChatGPT 4o mini": "gpt4oMini",
-    "ChatGPT 4o": "gpt4o",
+    "ChatGPT 4o mini": "gpt-4o-mini",
+    "ChatGPT 4o": "gpt-4o",
     # "ChatGPT o1": "gptO1",
     "NL4DV 2.0": "nl4dv_2",
     "NL4DV 3.0": "nl4dv_3",
@@ -176,7 +177,42 @@ if st.button('Go...', key='submit'):
         columns = st.columns(min(len(llmChoice), 3))
         columns2 = st.columns(min(len(llmChoice), 3))
         col_index = 0
-
+        if llmChoice["gpt-4o-mini"]:
+            fig = use_chatgpt(chosenFileURL, chatGptApiKey, user_input, "gpt-4o-mini")
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### ChatGPT 4o mini")
+                    # 检查图形是否生成
+                    if fig:
+                        st.pyplot(fig)
+                    else:
+                        st.warning("No figure")
+            else:
+                with columns2[col_index - 3]:
+                    st.markdown("#### ChatGPT 4o mini")
+                    if fig:
+                        st.pyplot(fig)
+                    else:
+                        st.warning("No figure")
+            col_index += 1
+        if llmChoice["gpt-4o"]:
+            fig = use_chatgpt(chosenFileURL, chatGptApiKey, user_input, "gpt-4o")
+            if col_index < 3:
+                with columns[col_index]:
+                    st.markdown("#### ChatGPT 4o")
+                    # 检查图形是否生成
+                    if fig:
+                        st.pyplot(fig)
+                    else:
+                        st.warning("No figure")
+            else:
+                with columns2[col_index - 3]:
+                    st.markdown("#### ChatGPT 4o")
+                    if fig:
+                        st.pyplot(fig)
+                    else:
+                        st.warning("No figure")
+            col_index += 1
         if llmChoice["nl4dv_3"]:
             if col_index < 3:
                 with columns[col_index]:
