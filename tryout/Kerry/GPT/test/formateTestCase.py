@@ -1,6 +1,7 @@
 import json
 
 file_path = './formatted_testCase.json'
+ori_path = '../data.json'
 
 # with open(file_path, 'r') as file:
 #     data = file.read().splitlines()
@@ -16,14 +17,38 @@ file_path = './formatted_testCase.json'
 with open(file_path, 'r') as file:
     data = json.load(file)
 
+with open(ori_path, 'r') as file1:
+    oriData = json.load(file1)
+
+count = 0
+
 formatted_data = {}
 for key, value in data.items():
+    belong = ''
+    count += 1
+    if count < 23:
+        belong = 'Kerry'
+    elif count <= 43:
+        belong = "Dewei"
+    elif count <= 63:
+        belong = "Lina"
+    elif count <= 83:
+        belong = "Zihuan"
+    elif count <= 103:
+        belong = "Jing"
 
     formatted_data[key] = {
-        "hardness": value["hardness"],
-        "result": None,
-        "code": None,
-        "zeroshot": None
+        "0": {
+            "belong": belong,
+            "question": value["0"]["question"],
+            "hardness": value["0"]["hardness"],
+            "isDataCorrect": value["0"]["isDataCorrect"],
+            "isStyleCorrect": value["0"]["isStyleCorrect"],
+            "evaluation": value["0"]["evaluation"],
+            "code": value["0"]["code"],
+            "addRule": value["0"]["addRule"],
+            "addExample": value["0"]["addExample"],
+        }
     }
 
 
