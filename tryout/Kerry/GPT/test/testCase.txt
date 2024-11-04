@@ -1,0 +1,103 @@
+189:Extra Hard
+194:Extra Hard
+195:Extra Hard
+196:Extra Hard
+201:Extra Hard
+202:Extra Hard
+210:Extra Hard
+211:Extra Hard
+224:Extra Hard
+225:Extra Hard
+291:Hard
+293:Hard
+295:Hard
+296:Hard
+312:Hard
+516:Hard
+659:Hard
+778:Hard
+1007:Hard
+1008:Hard
+1482:Hard
+1556:Hard
+1563:Extra Hard
+1574:Hard
+1580:Hard
+1807:Hard
+1831:Hard
+2615:Hard
+2617:Hard
+2656:Hard
+2657:Hard
+2750:Hard
+2850:Hard
+2851:Hard
+2857:Hard
+2998:Hard
+3222:Hard
+3227:Extra Hard
+3229:Hard
+1484@x_name@ASC:Hard
+1487@y_name@ASC:Hard
+1488@x_name@DESC:Hard
+1413@y_name@ASC:Hard
+298@y_name@DESC:Hard
+303@x_name@DESC:Hard
+330@y_name@ASC:Hard
+349@y_name@DESC:Hard
+927@y_name@ASC:Extra Hard
+942@x_name@DESC:Extra Hard
+2497@y_name@DESC:Hard
+2737@y_name@DESC:Hard
+2805@y_name@ASC:Hard
+3236@x_name@ASC:Hard
+1510@y_name@ASC:Hard
+2461@y_name@DESC:Hard
+2465@x_name@DESC:Hard
+2517@y_name@ASC:Hard
+1551@y_name@ASC:Extra Hard
+1622@y_name@ASC:Hard
+1627@x_name@DESC:Hard
+1703@y_name@DESC:Hard
+1802@y_name@DESC:Extra Hard
+1835@x_name@ASC:Hard
+754@y_name@ASC:Hard
+620@x_name@ASC:Hard
+647@x_name@DESC:Hard
+648@x_name@ASC:Extra Hard
+657@y_name@ASC:Hard
+3214@x_name@DESC:Hard
+2066@y_name@DESC:Hard
+680@y_name@DESC:Hard
+2165@y_name@DESC:Hard
+780@y_name@DESC:Extra Hard
+1006@y_name@ASC:Extra Hard
+1009@y_name@DESC:Extra Hard
+1242@y_name@ASC:Hard
+1419@y_name@ASC:Extra Hard
+41@y_name@ASC:Hard
+42@y_name@ASC:Hard
+44@y_name@DESC:Hard
+1991@y_name@DESC:Hard
+2024@y_name@DESC:Hard
+2028@y_name@DESC:Hard
+2031@y_name@ASC:Hard
+490@y_name@ASC:Hard
+2439@x_name@ASC:Hard
+2815@x_name@DESC:Hard
+11@y_name@ASC:Hard
+22@y_name@ASC:Hard
+1349@x_name@ASC:Extra Hard
+529@x_name@DESC:Hard
+1215@y_name@DESC:Hard
+1220@x_name@DESC:Hard
+1225@y_name@DESC:Hard
+1226@y_name@DESC:Hard
+279@y_name@DESC:Hard
+3267@y_name@ASC:Hard
+2950@y_name@ASC:Hard
+1979@y_name@DESC:Hard
+2755@x_name@DESC:Hard
+2756@x_name@DESC:Hard
+4015:Extra Hard
+4033:Hard

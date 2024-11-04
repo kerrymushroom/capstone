@@ -1,0 +1,620 @@
+{
+    "189": {
+        "hardness": "Extra Hard",
+        "result": "Good. Rotated x-axis",
+        "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom datetime import datetime\n\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\n\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['month_year'] = df['date_address_to'].dt.to_period('M')\ngrouped_df = df.groupby(['month_year', 'other_details']).size().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\ngrouped_df.plot(kind='bar', ax=ax)\n\nax.set_xlabel(\"Month-Year\")\nax.set_ylabel(\"Number of Addresses\")\nax.set_title(\"Distribution and Count of 'date_address_to' by Month and Other Details\")\nplt.suptitle(\"\")\nplt.show()",
+        "zeroshot": "If chart has enough space, rotate xtick to 0 using \"plt.xticks(rotation=0)\""
+    },
+    "194": {
+        "hardness": "Extra Hard",
+        "result": "Good. Rotated x-axis",
+        "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv', parse_dates=['date_address_to'])\n\ndf['year_month'] = df['date_address_to'].dt.to_period('M')\nmonthly_rental_sum = df.groupby(['other_details', 'year_month'])['monthly_rental'].sum().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nmonthly_rental_sum.plot(kind='bar', ax=ax)\nax.set_title('Distribution of Date Address To and Sum of Monthly Rental')\nax.set_xlabel('Month')\nax.set_ylabel('Sum of Monthly Rental')\nfig.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
+        "zeroshot": null
+    },
+    "195": {
+        "hardness": "Extra Hard",
+        "result": "Good, Rotated x-axis; Used key as legend name, not the specific data meaning",
+        "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['month'] = df['date_address_to'].dt.to_period('M')\ngrouped = df.groupby(['month', 'other_details'])['monthly_rental'].mean().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\ngrouped.plot(kind='bar', ax=ax)\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.set_xlabel('Month')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Average Monthly Rental Comparison by Property Type')\nplt.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
+        "zeroshot": "If you know the specific data meaning, use that as legend name"
+    },
+    "196": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "201": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "202": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "210": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "211": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "224": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "225": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "291": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "293": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "295": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "296": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "312": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "516": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "659": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "778": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1007": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1008": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1482": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1556": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1563": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1574": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1580": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1807": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1831": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2615": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2617": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2656": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2657": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2750": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2850": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2851": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2857": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2998": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3222": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3227": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3229": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1484@x_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1487@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1488@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1413@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "298@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "303@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "330@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "349@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "927@y_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "942@x_name@DESC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2497@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2737@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2805@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3236@x_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1510@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2461@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2465@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2517@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1551@y_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1622@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1627@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1703@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1802@y_name@DESC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1835@x_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "754@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "620@x_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "647@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "648@x_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "657@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3214@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2066@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "680@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2165@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "780@y_name@DESC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1006@y_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1009@y_name@DESC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1242@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1419@y_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "41@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "42@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "44@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1991@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2024@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2028@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2031@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "490@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2439@x_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2815@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "11@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "22@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1349@x_name@ASC": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "529@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1215@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1220@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1225@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1226@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "279@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "3267@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2950@y_name@ASC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "1979@y_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2755@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "2756@x_name@DESC": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "4015": {
+        "hardness": "Extra Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    },
+    "4033": {
+        "hardness": "Hard",
+        "result": null,
+        "code": null,
+        "zeroshot": null
+    }
+}
