@@ -60,7 +60,7 @@
             "isStyleCorrect": false,
             "evaluation": "Rotated x-axis",
             "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/Student_Addresses.csv')\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['year'] = df['date_address_from'].dt.year\n\ngrouped = df.groupby(['year', 'other_details'])['monthly_rental'].sum().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\ngrouped.plot(kind='bar', ax=ax, width=0.7)\n\nax.set_xlabel('Year')\nax.set_ylabel('Total Monthly Rental')\nfig.suptitle('')\nax.set_title('Comparison of Total Monthly Rental by Year and Property Type')\n\nplt.show()",
-            "addRule": "Don't rotate x-axis label.",
+            "addRule": null,
             "addExample": null
         }
     },
@@ -287,7 +287,7 @@
     },
     "1563": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For all employees who have the letters D or S in their first name, show me about the distribution of  job_id and the average of salary , and group by attribute job_id in a bar chart.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -300,7 +300,7 @@
     },
     "1574": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For all employees who have the letters D or S in their first name, show me about the correlation between  salary and  commission_pct  in a scatter chart.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -313,7 +313,7 @@
     },
     "1580": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For those employees whose salary is in the range of 8000 and 12000 and commission is not null or department number does not equal to 40, visualize a bar chart about the distribution of  hire_date and the amount of hire_date bin hire_date by month.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -326,7 +326,7 @@
     },
     "1807": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For employees with first names that end with the letter 'm', groups and counts the first name to visualize a pie graph.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -339,7 +339,7 @@
     },
     "1831": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For those employees whose first name does not contain the letter M, sum their salary by binning the hire date into the day of week interval for visualizing a bar chart.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -352,7 +352,7 @@
     },
     "2615": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "What are the payment date of the payment with amount paid higher than 300 or with payment type is 'Check', bin the payment date by month and count them by a bar chart",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -365,7 +365,7 @@
     },
     "2617": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "What are the payment date of the payment with amount paid higher than 300 or with payment type is 'Check, and count them by a line chart",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -378,7 +378,7 @@
     },
     "2656": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "Show the countries that have managers of age above 50 or below 46, and count them by a pie chart",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -391,7 +391,7 @@
     },
     "2657": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "Show the countries that have managers of age above 50 or below 46, and count them by a bar chart",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -404,7 +404,7 @@
     },
     "2750": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "What is the total number of captains in each rank and class? Let class as X-axis, and categorize by rank with a stacked bar chart.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -417,7 +417,7 @@
     },
     "2850": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "What are the top 5 countries by number of invoices and how many do they have. Plot them as bar chart.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -430,7 +430,7 @@
     },
     "2851": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "Show me a bar chart for what are the names of the countries and average invoice size of the top countries by size?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -443,7 +443,7 @@
     },
     "2857": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "Draw a bar chart for what are the names of the top 8 countries by total invoice size and what are those sizes?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -456,7 +456,7 @@
     },
     "2998": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "A bar chart for what are the number of the dates of transactions with at least 100 share count or amount bigger than 100? Bin date by weekday.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -469,7 +469,7 @@
     },
     "3222": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "A bar chart shows the number of appellations whose score is higher than 93, and ordered by Name.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -482,7 +482,7 @@
     },
     "3227": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "For those wines whose price is bigger than 100, group by grape, count their total number of each year and sort by year in asc in a bar chart.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -495,7 +495,7 @@
     },
     "3229": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "A bar chart listing the number of wines whose price is bigger than 100 ordered by year.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -508,7 +508,7 @@
     },
     "1484@x_name@ASC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "List the number of games in each season and group by away team in a group line chart, and order in asc by the X-axis please.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -521,7 +521,7 @@
     },
     "1487@y_name@ASC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "Stacked bar chart of how many away team for with each Home_team in each away team, rank from low to high by the y-axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -534,7 +534,7 @@
     },
     "1488@x_name@DESC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "List the number of games for each home team and group by away team in a stacked bar chart The x-axis is home team, and I want to list x-axis in descending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -547,7 +547,7 @@
     },
     "1413@y_name@ASC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Dewei",
             "question": "How many flights with price higher than 300 for each destination city? Return a bar chart, and order in ascending by the total number.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -560,7 +560,7 @@
     },
     "298@y_name@DESC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "For those dates with a max temperature greater than or equal to 80, I want to know the number of days on the day of the week interval using a bar chart, could you show from high to low by the Y?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -573,7 +573,7 @@
     },
     "303@x_name@DESC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "Use a line chart to show the change in maximum temperature among all regions in July 2015, with the x-axis in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -586,7 +586,7 @@
     },
     "330@y_name@ASC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "Count those days for each year and in which zip code was the min dew point lower than any day in zip code 94107 using a bar graph, and display the number of date in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -599,7 +599,7 @@
     },
     "349@y_name@DESC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "On which day has it neither been foggy nor rained in the zip code of 94107, and bin by year, count them by a bar chart, sort by the y axis in desc.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -612,7 +612,7 @@
     },
     "927@y_name@ASC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "How many accounts are opened in each day? Bin the account open day by weekday and group by other account details in a stacked bar chart, and rank by the y axis in ascending.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -625,7 +625,7 @@
     },
     "942@x_name@DESC": {
         "0": {
-            "belong": "Kerry",
+            "belong": "Lina",
             "question": "How many accounts are opened in each year? Show a group line chart that group by other account details, and could you order by the x axis in asc?",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -638,7 +638,7 @@
     },
     "2497@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "What are the last year of the parties whose theme is \"Spring\" or \"Teqnology\"? Count the last year for a bar chart, I want to rank y axis in desc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -651,7 +651,7 @@
     },
     "2737@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Draw a bar chart for how many captains with younger than 50 are in each rank?, and show Y-axis in descending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -664,7 +664,7 @@
     },
     "2805@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "A bar chart for listing the number of the names of products that are not in any event, sort the number of product name in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -677,7 +677,7 @@
     },
     "3236@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Visualize a bar chart about the number of winery of the wines whose price is bigger than 100, and rank X in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -690,7 +690,7 @@
     },
     "1510@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Show the number of companies without a gas station in each main industry with a bar chart, could you list from low to high by the Y?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -703,7 +703,7 @@
     },
     "2461@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Draw a bar chart for what is average age of male for different job title?, and show Y in desc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -716,7 +716,7 @@
     },
     "2465@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Draw a bar chart for how many people are under 40 for each gender?, and rank in desc by the x-axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -729,7 +729,7 @@
     },
     "2517@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Show all ministers who do not belong to Progress Party, and count them by a bar chart, and order in asc by the Y.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -742,7 +742,7 @@
     },
     "1551@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "For all employees who have the letters D or S in their first name, return a bar chart about the distribution of hire_date and the average of salary bin hire_date by weekday, and display from low to high by the y axis.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -755,7 +755,7 @@
     },
     "1622@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "For all employees in the same department as Clara excluding Clara, bin their hire date into the month interval, and count how many employees in each month for a bar chart, rank from low to high by the Y.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -768,7 +768,7 @@
     },
     "1627@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Group and count the job id for all employees whose salary is smaller than any salary of those employees whose job title is MK_MAN for visualizing a bar chart, and rank by the names in desc.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -781,7 +781,7 @@
     },
     "1703@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "Compute the number of each type of job ids for employees who make more than the highest-earning employee with title PU_MAN, with a bar chart, and show by the the number of job id in desc.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -794,7 +794,7 @@
     },
     "1802@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "For those employees whose first name is ending with the letter m, show the frequency of the first name using a bar chart, list by the y-axis in desc.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -807,7 +807,7 @@
     },
     "1835@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Lina",
             "question": "For those employees whose first name does not contain the letter M, give me a line chart to show the hire date and the corresponding salaries, show in asc by the x-axis please.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -820,7 +820,7 @@
     },
     "754@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Return a bar chart showing the number of templates with a version number greater than 5 for each template type code, and order y-axis in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -833,7 +833,7 @@
     },
     "620@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "How many rooms in each building have a capacity of over 50 Visualize by bar chart, list by the X in ascending.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -846,7 +846,7 @@
     },
     "647@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "How many courses are provided in each year? Visualize with a group line chart grouping by semester, could you list x axis in asc order?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -859,7 +859,7 @@
     },
     "648@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Find the number of courses provided in each year with a group line chart that groups by semester, list the binning year in asc order.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -872,7 +872,7 @@
     },
     "657@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "How many departments whose budget is more than the average budget in each building? Show me a bar chart, list by the total number in asc.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -885,7 +885,7 @@
     },
     "3214@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "A bar chart about the number of countries for all people whose age is smaller than the average, and could you display in desc by the X-axis?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -898,7 +898,7 @@
     },
     "2066@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Find the name and account balance of the customer whose name includes the letter 'a' Visualize them using a bar chart, show y-axis in descending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -911,7 +911,7 @@
     },
     "680@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Stack bar chart of the number of headquarters vs Industry based on headquarters, display Y-axis in desc order please.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -924,7 +924,7 @@
     },
     "2165@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "What is the name of the technician whose team is not 'NYY', and count them by a bar chart, show by the total number from high to low.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -937,7 +937,7 @@
     },
     "780@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Show the number of documents in different ending date Bin ending date by weekday and group by location code with a stacked bar chart, could you display in descending by the y axis please?",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -950,7 +950,7 @@
     },
     "1006@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Show the number of products with price higher than 1000 or lower than 500 for each product type code in a bar chart, I want to order by the total number in asc please.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -963,7 +963,7 @@
     },
     "1009@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Show the number of products with price higher than 1000 or lower than 500 for each product name in a bar chart, and could you rank y-axis in descending order?",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -976,7 +976,7 @@
     },
     "1242@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "When are the birthdays of customer who are classified as 'Good Customer' status, bin birthday by weekday and count them by a bar chart, could you order y-axis in ascending order?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -989,7 +989,7 @@
     },
     "1419@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "What are the countries of all airlines whose names start with Orbit, and count them by a bar chart, order total number from low to high order.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -1002,7 +1002,7 @@
     },
     "41@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Show the average age for all female students and group them by first name in a bar chart, and could you rank the average of age in asc order?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1015,7 +1015,7 @@
     },
     "42@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "A bar chart about the number of last name for all female students whose sex is F, and rank in asc by the y-axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1028,7 +1028,7 @@
     },
     "44@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Show the average age for all female students and group them by last name with a bar chart, and could you order the average of age in desc order?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1041,7 +1041,7 @@
     },
     "1991@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "For all the claims whose claimed amount is larger than the average, bin the claim date into day of week interval and count them for visualizing a bar chart, order from high to low by the y axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1054,7 +1054,7 @@
     },
     "2024@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "For those payments processed with Visa, bin the payment day into Year interval and count them for a bar chart, order from high to low by the y axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1067,7 +1067,7 @@
     },
     "2028@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Zihuan",
             "question": "Calculate the average of amount for all the payments processed with Visa by each year using a bar chart, and could you order y axis in desc order?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1080,7 +1080,7 @@
     },
     "2031@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "For those payments processed with Visa, show me the number of payments of each day of the week using a bar chart, and sort total number in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1093,7 +1093,7 @@
     },
     "490@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "What are the countries of mountains with height bigger than 5000, and count them by a bar chart, and I want to list y-axis in asc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1106,7 +1106,7 @@
     },
     "2439@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "What are the category of music festivals with evaluation \"Awarded\", and count them by a bar chart, I want to list x axis in asc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1119,7 +1119,7 @@
     },
     "2815@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Compute the total number in each competition type, and then split by country. Plot a bar chart and show in desc by the x-axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1132,7 +1132,7 @@
     },
     "11@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "How many faculty members do we have for each rank and gender? Plot them as bar chart, I want to sort y axis in asc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1145,7 +1145,7 @@
     },
     "22@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Show the number of male and female assistant professors with a bar chart, list y axis in ascending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1158,7 +1158,7 @@
     },
     "1349@x_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Draw a line chart about the change of the amount of Start_from over Start_from , and group by attribute Is_full_time and bin start_from by year, rank x axis in asc order.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -1171,7 +1171,7 @@
     },
     "529@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find the number of professors with a PhD degree in each department Show bar chart, and I want to sort x-axis in desc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1184,7 +1184,7 @@
     },
     "1215@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find the number of students who are not in the largest major and group by students' first name in a bar chart, and rank from high to low by the y axis.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1197,7 +1197,7 @@
     },
     "1220@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "What is the average age of male students in each city? Draw a bar chart, show by the names in descending.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1210,7 +1210,7 @@
     },
     "1225@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find the number of students whose age is younger than the average age and group by students' first name in a bar chart, could you show in descending by the y axis?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1223,7 +1223,7 @@
     },
     "1226@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find the number of students whose age is younger than the average age and group by students' last name in a bar chart, and sort by the Y-axis in descending.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1236,7 +1236,7 @@
     },
     "279@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "A bar chart about the number of end dates for incidents with incident type code \"NOISE\" and bin by month, could you show by the y-axis from high to low please?",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1249,7 +1249,7 @@
     },
     "3267@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "For each continent where the average life expectancy is shorter than 72, show their total population with a bar chart, display in asc by the sum population.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1262,7 +1262,7 @@
     },
     "2950@y_name@ASC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find those years for all exhibitions with ticket prices lower than 15, return a bar chart that groups by year and counts the total number of years, and I want to display in ascending by the total number.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1275,7 +1275,7 @@
     },
     "1979@y_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Find the number of rooms with price higher than 120 for different decor Show bar chart, and list by the Y in descending.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1288,7 +1288,7 @@
     },
     "2755@x_name@DESC": {
         "0": {
-            "belong": "Dewei",
+            "belong": "Jing",
             "question": "Show me a stacked bar graph, the x-axis is the nationality of ship, and the y-axis is their total number of different nationality and split by ship type, and show X-axis in desc order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1301,7 +1301,7 @@
     },
     "2756@x_name@DESC": {
         "0": {
-            "belong": "Lina",
+            "belong": "Jing",
             "question": "Stack bar chart of the number of type vs Nationality based on type, and list x-axis in descending order.",
             "hardness": "Hard",
             "isDataCorrect": null,
@@ -1314,7 +1314,7 @@
     },
     "4015": {
         "0": {
-            "belong": "Lina",
+            "belong": "Jing",
             "question": "Show the relationship between the number of staff and the score of the shop. Scatter plot is preferred.",
             "hardness": "Extra Hard",
             "isDataCorrect": null,
@@ -1327,7 +1327,7 @@
     },
     "4033": {
         "0": {
-            "belong": "Lina",
+            "belong": "Jing",
             "question": "From 1973 to 1979, show the maximum acceleration of cars with 4, 6, and 8 cylinders each year. Line chart.",
             "hardness": "Hard",
             "isDataCorrect": null,
