@@ -1083,11 +1083,11 @@
             "belong": "Jing",
             "question": "For those payments processed with Visa, show me the number of payments of each day of the week using a bar chart, and sort total number in ascending order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
-            "addRule": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Incomplete data display. Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/insurance_policies/Payments.csv')\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\ndf['Day_of_Week'] = df['Date_Payment_Made'].dt.day_name()\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\nvisa_payment_counts = visa_payments['Day_of_Week'].value_counts().sort_values(ascending=True)\n\nfig, ax = plt.subplots(figsize=(10, 4))\nvisa_payment_counts.plot(kind='bar', ax=ax)\nax.set_title('Number of Visa Payments by Day of the Week')\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Number of Payments')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nplt.suptitle('')\nplt.tight_layout()\nplt.show()",
+            "addRule": "In a bar or line chart, even if the data is 0, it should be displayed.",
             "addExample": null
         }
     },
@@ -1096,11 +1096,11 @@
             "belong": "Jing",
             "question": "What are the countries of mountains with height bigger than 5000, and count them by a bar chart, and I want to list y-axis in asc order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
-            "addRule": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates. Rotated X axis labels. Wrong order",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/climbing/mountain.csv')\nfiltered_df = df[df['Height'] > 5000]\ncountry_counts = filtered_df['Country'].value_counts().sort_values()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ncountry_counts.plot(kind='bar', ax=ax)\n\nax.set_xlabel('Country')\nax.set_ylabel('Number of Mountains')\nax.set_title('Countries with Mountains Taller than 5000m')\nfig.suptitle('')\n\nplt.show()",
+            "addRule": "After sorted, The data with the same value should be sorted to displayed in natural order if not specified.",
             "addExample": null
         }
     },
@@ -1109,10 +1109,10 @@
             "belong": "Jing",
             "question": "What are the category of music festivals with evaluation \"Awarded\", and count them by a bar chart, I want to list x axis in asc order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/music_4/music_festival.csv')\ndf_awarded = df[df['Result'] == 'Awarded']\ncategory_counts = df_awarded['Category'].value_counts().sort_index()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(category_counts.index, category_counts.values)\nax.set_xlabel('Category')\nax.set_ylabel('Count')\nax.set_title('Count of Awarded Categories in Music Festivals')\nplt.suptitle('')\nplt.xticks(rotation=45)\nplt.show()",
             "addRule": null,
             "addExample": null
         }
