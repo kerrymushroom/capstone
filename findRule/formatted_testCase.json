@@ -811,8 +811,8 @@
             "question": "For those employees whose first name does not contain the letter M, give me a line chart to show the hire date and the corresponding salaries, show in asc by the x-axis please.",
             "hardness": "Hard",
             "isDataCorrect": true,
-            "isStyleCorrect": "The x-axis data display is incomplete.",
-            "evaluation": null,
+            "isStyleCorrect": false,
+            "evaluation": "The x-axis data display is incomplete.",
             "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/hr_1/employees.csv')\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\nfiltered_df = df[~df['FIRST_NAME'].str.contains('M')]\nsorted_df = filtered_df.sort_values(by='HIRE_DATE')\nplt.figure(figsize=(12,6))\nplt.plot(sorted_df['HIRE_DATE'], sorted_df['SALARY'], marker='o')\nplt.xlabel('Hire Date')\nplt.ylabel('Salary')\nplt.title('Salaries Over Hire Dates (Excluding First Names with \"M\")')\nplt.suptitle('')\nplt.grid(True)\nplt.tight_layout()\nplt.show()",
             "addRule": "When there is a lot of data, the x-axis scale should be displayed as completely as possible without overlapping.",
             "addExample": null
@@ -823,11 +823,11 @@
             "belong": "Zihuan",
             "question": "Return a bar chart showing the number of templates with a version number greater than 5 for each template type code, and order y-axis in ascending order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
-            "addRule": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/cre_Doc_Template_Mgt/Templates.csv')\nfiltered_df = df[df['Version_Number'] > 5]\ncount_by_type = filtered_df['Template_Type_Code'].value_counts(ascending=True)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(count_by_type.index, count_by_type.values)\nax.set_xlabel('Template Type Code')\nax.set_ylabel('Number of Templates with Version > 5')\nax.set_title('Number of Templates by Type with Version Number > 5')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nfig.suptitle('')\nplt.show()",
+            "addRule": "If axis data is number, make sure uses integer",
             "addExample": null
         }
     },
@@ -836,10 +836,10 @@
             "belong": "Zihuan",
             "question": "How many rooms in each building have a capacity of over 50 Visualize by bar chart, list by the X in ascending.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/college_2/classroom.csv')\nfiltered_df = df[df['capacity'] > 50]\nroom_counts = filtered_df.groupby('building')['room_number'].count().sort_index()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nroom_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Building')\nax.set_ylabel('Number of Rooms with Capacity > 50')\nax.set_title('Rooms with Capacity Over 50 by Building')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -849,10 +849,10 @@
             "belong": "Zihuan",
             "question": "How many courses are provided in each year? Visualize with a group line chart grouping by semester, could you list x axis in asc order?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/college_2/SECTION.csv')\ngrouped_data = df.groupby(['year', 'semester']).size().unstack()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ngrouped_data.sort_index().plot(kind='line', ax=ax, marker='o')\nax.set_xlabel('Year')\nax.set_ylabel('Number of Courses')\nax.set_title('Number of Courses Provided Each Year by Semester')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -862,10 +862,10 @@
             "belong": "Zihuan",
             "question": "Find the number of courses provided in each year with a group line chart that groups by semester, list the binning year in asc order.",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/college_2/SECTION.csv')\ndf_grouped = df.groupby(['year', 'semester']).size().unstack()\ndf_grouped.plot(ax=ax, kind='line', marker='o')\nax.set_title('Number of Courses Provided per Year by Semester')\nax.set_xlabel('Year')\nax.set_ylabel('Number of Courses')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -875,11 +875,11 @@
             "belong": "Zihuan",
             "question": "How many departments whose budget is more than the average budget in each building? Show me a bar chart, list by the total number in asc.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
-            "addRule": null,
+            "isDataCorrect": false,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/college_2/department.csv')\navg_budget = df.groupby('building')['budget'].mean().reset_index()\nmerged_df = df.merge(avg_budget, on='building', suffixes=('', '_avg'))\nabove_avg_df = merged_df[merged_df['budget'] > merged_df['budget_avg']]\nbuilding_counts = above_avg_df['building'].value_counts().sort_values()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(building_counts.index, building_counts.values)\nax.set_xlabel('Building')\nax.set_ylabel('Number of Departments')\nax.set_title('Departments with Budget Above Average by Building')\nfig.suptitle('')\nplt.xticks(rotation=45, ha=\"right\")\nplt.tight_layout()\nplt.show()\n",
+            "addRule": "Don't use plt.xticks(ha) when not necessary. ",
             "addExample": null
         }
     },
@@ -888,10 +888,10 @@
             "belong": "Zihuan",
             "question": "A bar chart about the number of countries for all people whose age is smaller than the average, and could you display in desc by the X-axis?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis;Display in ASC by the x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/wedding/people.csv')\naverage_age = df['Age'].mean()\ndf_filtered = df[df['Age'] < average_age]\ncountry_counts = df_filtered['Country'].value_counts().sort_index(ascending=False)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ncountry_counts.sort_values().plot(kind='bar', ax=ax)\nax.set_xlabel(\"Country\")\nax.set_ylabel(\"Number of People\")\nax.set_title(\"Number of People by Country with Age Below Average\")\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -901,10 +901,10 @@
             "belong": "Zihuan",
             "question": "Find the name and account balance of the customer whose name includes the letter 'a' Visualize them using a bar chart, show y-axis in descending order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/loan_1/customer.csv')\nfiltered_df = df[df['cust_name'].str.contains('a', case=False)]\nsorted_df = filtered_df.sort_values(by='acc_bal', ascending=False)\nplt.bar(sorted_df['cust_name'], sorted_df['acc_bal'])\nplt.xlabel('Customer Name')\nplt.ylabel('Account Balance')\nplt.title('Account Balance of Customers with \"a\" in their Name')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -914,10 +914,10 @@
             "belong": "Zihuan",
             "question": "Stack bar chart of the number of headquarters vs Industry based on headquarters, display Y-axis in desc order please.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/company_employee/company.csv')\nheadquarters_industry_count = df.groupby(['Headquarters', 'Industry']).size().unstack()\nheadquarters_industry_count = headquarters_industry_count.loc[headquarters_industry_count.sum(axis=1).sort_values(ascending=False).index]\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nheadquarters_industry_count.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Headquarters')\nax.set_ylabel('Number of Companies')\nax.set_title('Number of Headquarters vs Industry Based on Headquarters')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -927,10 +927,10 @@
             "belong": "Zihuan",
             "question": "What is the name of the technician whose team is not 'NYY', and count them by a bar chart, show by the total number from high to low.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": false,
+            "isStyleCorrect": false,
+            "evaluation": "The problem description is not clear; Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/machine_repair/technician.csv')\ndf_filtered = df[df['Team'] != 'NYY']\nname_counts = df_filtered['Name'].value_counts().sort_values(ascending=False)\nname_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Technician Name')\nax.set_ylabel('Count')\nax.set_title('Number of Technicians by Name (Excluding Team NYY)')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -940,10 +940,10 @@
             "belong": "Zihuan",
             "question": "Show the number of documents in different ending date Bin ending date by weekday and group by location code with a stacked bar chart, could you display in descending by the y axis please?",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/cre_Doc_Tracking_DB/Document_locations.csv')\ndf['Date_in_Locaton_To'] = pd.to_datetime(df['Date_in_Locaton_To'])\ndf['Weekday'] = df['Date_in_Locaton_To'].dt.day_name()\nresult = df.groupby(['Weekday', 'Location_Code'])['Document_ID'].count().unstack().fillna(0)\nweekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']\nresult = result.reindex(weekday_order)\nresult = result.loc[result.sum(axis=1).sort_values(ascending=False).index]\nfig, ax = plt.subplots(figsize=(10, 4))\nresult.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Weekday of Ending Date')\nax.set_ylabel('Number of Documents')\nax.set_title('Number of Documents by Weekday and Location Code')\nplt.suptitle('')\nplt.tight_layout()\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -953,10 +953,10 @@
             "belong": "Zihuan",
             "question": "Show the number of products with price higher than 1000 or lower than 500 for each product type code in a bar chart, I want to order by the total number in asc please.",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\nfiltered_df = df[(df['product_price'] > 1000) | (df['product_price'] < 500)]\nproduct_counts = filtered_df['product_type_code'].value_counts(ascending=True)\nproduct_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Product Type Code')\nax.set_ylabel('Number of Products')\nax.set_title('Products Priced >1000 or <500')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -966,10 +966,10 @@
             "belong": "Zihuan",
             "question": "Show the number of products with price higher than 1000 or lower than 500 for each product name in a bar chart, and could you rank y-axis in descending order?",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\nfiltered_df = df[(df['product_price'] > 1000) | (df['product_price'] < 500)]\nproduct_counts = filtered_df['product_name'].value_counts().sort_values(ascending=False)\nproduct_counts.plot(kind='bar', ax=ax)\nax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')\nax.set_ylabel('Number of Products')\nax.set_xlabel('Product Name')\nax.set_title('Count of Products with Price > 1000 or < 500 by Product Name')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -979,10 +979,10 @@
             "belong": "Zihuan",
             "question": "When are the birthdays of customer who are classified as 'Good Customer' status, bin birthday by weekday and count them by a bar chart, could you order y-axis in ascending order?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ndf = pd.read_csv('./visEval_dataset/databases/driving_school/Customers.csv')\ndf['date_of_birth'] = pd.to_datetime(df['date_of_birth'])\ndf['weekday'] = df['date_of_birth'].dt.day_name()\ngood_customers = df[df['customer_status_code'] == 'Good Customer']\nweekday_counts = good_customers['weekday'].value_counts().sort_values()\nweekday_counts.plot(kind='bar', ax=ax)\nax.set_ylabel('Number of Customers')\nax.set_xlabel('Weekday of Birth')\nax.set_title('Birthdays of Good Customers by Weekday')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -992,10 +992,10 @@
             "belong": "Zihuan",
             "question": "What are the countries of all airlines whose names start with Orbit, and count them by a bar chart, order total number from low to high order.",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/flight_4/airlines.csv')\norbit_airlines = df[df['name'].str.startswith('Orbit')]\ncountry_counts = orbit_airlines['country'].value_counts().sort_values()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ncountry_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of Airlines')\nax.set_title('Airlines Starting with \"Orbit\" by Country')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1005,10 +1005,10 @@
             "belong": "Zihuan",
             "question": "Show the average age for all female students and group them by first name in a bar chart, and could you rank the average of age in asc order?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/allergy_1/Student.csv')\nfemale_students = df[df['Sex'] == 'F']\naverage_age_by_fname = female_students.groupby('Fname')['Age'].mean().sort_values()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\naverage_age_by_fname.plot(kind='bar', ax=ax)\nax.set_xlabel('First Name')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Female Students by First Name')\nfig.suptitle('')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1018,10 +1018,10 @@
             "belong": "Zihuan",
             "question": "A bar chart about the number of last name for all female students whose sex is F, and rank in asc by the y-axis.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code":"import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/allergy_1/Student.csv')\nfemale_students = df[df['Sex'] == 'F']\nlName_counts = female_students['LName'].value_counts().sort_values()\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nlName_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Number of Female Students')\nax.set_title('Number of Last Names for Female Students')\nplt.suptitle('{}')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1031,10 +1031,10 @@
             "belong": "Zihuan",
             "question": "Show the average age for all female students and group them by last name with a bar chart, and could you order the average of age in desc order?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv(\"./visEval_dataset/databases/allergy_1/Student.csv\")\nfemale_students = df[df['Sex'] == 'F']\nage_by_lastname = female_students.groupby('LName')['Age'].mean().sort_values(ascending=False)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nage_by_lastname.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Female Students by Last Name')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1044,10 +1044,10 @@
             "belong": "Zihuan",
             "question": "For all the claims whose claimed amount is larger than the average, bin the claim date into day of week interval and count them for visualizing a bar chart, order from high to low by the y axis.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Rotated x-axis; The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport datetime\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/insurance_policies/Claims.csv')\ndf['Date_Claim_Made'] = pd.to_datetime(df['Date_Claim_Made'])\naverage_claimed_amount = df['Amount_Claimed'].mean()\nfiltered_df = df[df['Amount_Claimed'] > average_claimed_amount]\nfiltered_df['Day_of_Week'] = filtered_df['Date_Claim_Made'].dt.day_name()\ncounts = filtered_df['Day_of_Week'].value_counts().sort_values(ascending=False)\ncounts.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Number of Claims')\nax.set_title('Claims Above Average Amount by Day of the Week')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -1057,10 +1057,10 @@
             "belong": "Zihuan",
             "question": "For those payments processed with Visa, bin the payment day into Year interval and count them for a bar chart, order from high to low by the y axis.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "The y-axis data display is decimal",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/insurance_policies/Payments.csv')\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\nvisa_payments['Year'] = visa_payments['Date_Payment_Made'].dt.year\npayments_count = visa_payments.groupby('Year').size().sort_values(ascending=False)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(payments_count.index.astype(str), payments_count.values)\nax.set_title('Visa Payments Count by Year')\nax.set_xlabel('Year')\nax.set_ylabel('Count of Payments')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1070,10 +1070,10 @@
             "belong": "Zihuan",
             "question": "Calculate the average of amount for all the payments processed with Visa by each year using a bar chart, and could you order y axis in desc order?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "x-axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/insurance_policies/Payments.csv')\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\ndf['Year'] = df['Date_Payment_Made'].dt.year\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\navg_amount_by_year = visa_payments.groupby('Year')['Amount_Payment'].mean().sort_values(ascending=False)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(avg_amount_by_year.index, avg_amount_by_year.values)\nax.set_xlabel('Year')\nax.set_ylabel('Average Amount')\nax.set_title('Average Payment Amount Processed with Visa by Year')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
