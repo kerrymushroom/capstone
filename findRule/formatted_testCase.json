@@ -1122,12 +1122,12 @@
             "belong": "Jing",
             "question": "Compute the total number in each competition type, and then split by country. Plot a bar chart and show in desc by the x-axis.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Wrong chart type, bar chart -> stacked bar chart",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/sports_competition/competition.csv')\ndf['Competition_type'] = df['Competition_type'].astype('category')\ndf['Country'] = df['Country'].astype('category')\n\ncompetition_counts = df.groupby(['Competition_type', 'Country']).size().unstack().fillna(0)\ncompetition_counts = competition_counts.loc[:, competition_counts.sum().sort_values(ascending=False).index]\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\ncompetition_counts.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Competition Type')\nax.set_ylabel('Number of Competitions')\nax.set_title('Total Number of Competitions by Type and Country')\nfig.suptitle('')\n\nplt.show()",
             "addRule": null,
-            "addExample": null
+            "addExample": true
         }
     },
     "11@y_name@ASC": {
@@ -1135,10 +1135,10 @@
             "belong": "Jing",
             "question": "How many faculty members do we have for each rank and gender? Plot them as bar chart, I want to sort y axis in asc order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/activity_1/Faculty.csv')\nrank_gender_count = df.groupby(['Rank', 'Sex']).size().unstack().fillna(0)\nrank_gender_sorted = rank_gender_count.sort_values(by='M', axis=0)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nrank_gender_sorted.plot(kind='bar', ax=ax, stacked=False)\nax.set_ylabel('Number of Faculty Members')\nax.set_xlabel('Rank')\nax.set_title('Number of Faculty Members by Rank and Gender')\nplt.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1148,10 +1148,10 @@
             "belong": "Jing",
             "question": "Show the number of male and female assistant professors with a bar chart, list y axis in ascending order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/activity_1/Faculty.csv')\n\nasst_prof_counts = df[df['Rank'] == 'AsstProf']['Sex'].value_counts().sort_values()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(asst_prof_counts.index, asst_prof_counts.values)\nax.set_xlabel('Sex')\nax.set_ylabel('Number of Assistant Professors')\nax.set_title('Number of Male and Female Assistant Professors')\nplt.suptitle('')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1161,10 +1161,10 @@
             "belong": "Jing",
             "question": "Draw a line chart about the change of the amount of Start_from over Start_from , and group by attribute Is_full_time and bin start_from by year, rank x axis in asc order.",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates, Incomplete data display",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/employee_hire_evaluation/hiring.csv')\ndf['Start_from'] = pd.to_datetime(df['Start_from'], format='%Y')\ndf_grouped = df.groupby([df['Start_from'].dt.year, 'Is_full_time']).size().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\ndf_grouped.plot(ax=ax, marker='o')\n\nax.set_xlabel('Year')\nax.set_ylabel('Number of Employees Hired')\nax.set_title('Annual Employee Hiring by Employment Type')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1174,10 +1174,10 @@
             "belong": "Jing",
             "question": "Find the number of professors with a PhD degree in each department Show bar chart, and I want to sort x-axis in desc order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/college_1/professor.csv')\nphd_counts = df[df['PROF_HIGH_DEGREE'] == 'Ph.D.'].groupby('DEPT_CODE').size().sort_values(ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nphd_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Department Code')\nax.set_ylabel('Number of Professors with Ph.D.')\nax.set_title('Number of Professors with Ph.D. in Each Department')\nplt.suptitle('')\n\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1187,10 +1187,10 @@
             "belong": "Jing",
             "question": "Find the number of students who are not in the largest major and group by students' first name in a bar chart, and rank from high to low by the y axis.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/dorm_1/student.csv')\n\nlargest_major = df['Major'].value_counts().idxmax()\nfiltered_df = df[df['Major'] != largest_major]\n\ngrouped_data = filtered_df.groupby('Fname').size().reset_index(name='Count')\nsorted_data = grouped_data.sort_values(by='Count', ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(sorted_data['Fname'], sorted_data['Count'], color='skyblue')\nax.set_xlabel('First Name of Students')\nax.set_ylabel('Number of Students')\nax.set_title('Number of Students Not in Largest Major by First Name')\nplt.xticks(rotation=45)\nplt.suptitle('')\nplt.tight_layout()\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1200,10 +1200,10 @@
             "belong": "Jing",
             "question": "What is the average age of male students in each city? Draw a bar chart, show by the names in descending.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/dorm_1/student.csv')\ndf = df[df['Sex'] == 'M']\naverage_age = df.groupby('city_code')['Age'].mean().sort_values(ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(average_age.index, average_age.values)\nax.set_xlabel('City Code')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Male Students by City')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1213,10 +1213,10 @@
             "belong": "Jing",
             "question": "Find the number of students whose age is younger than the average age and group by students' first name in a bar chart, could you show in descending by the y axis?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/dorm_1/student.csv')\navg_age = df['Age'].mean()\nfiltered_df = df[df['Age'] < avg_age]\ngrouped = filtered_df.groupby('Fname').size().reset_index(name='count')\nsorted_data = grouped.sort_values(by='count', ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nplt.bar(sorted_data['Fname'], sorted_data['count'], color='skyblue')\nax.set_title('Number of Students Younger than Average Age by First Name')\nax.set_xlabel('First Name')\nax.set_ylabel('Number of Students')\nplt.xticks(rotation=45)\nplt.tight_layout()\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1226,10 +1226,10 @@
             "belong": "Jing",
             "question": "Find the number of students whose age is younger than the average age and group by students' last name in a bar chart, and sort by the Y-axis in descending.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless subtitle, Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/dorm_1/student.csv')\naverage_age = df['Age'].mean()\nyoung_students = df[df['Age'] < average_age]\nstudents_grouped = young_students.groupby('LName').size().sort_values(ascending=False)\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nstudents_grouped.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Number of Students')\nplt.title('Number of Students Younger than Average Age Grouped by Last Name')\nfig.suptitle('{}')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1239,12 +1239,12 @@
             "belong": "Jing",
             "question": "A bar chart about the number of end dates for incidents with incident type code \"NOISE\" and bin by month, could you show by the y-axis from high to low please?",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": false,
+            "isStyleCorrect": false,
+            "evaluation": "Failed to bin by month",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom pandas.tseries.offsets import MonthEnd\n\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/Behavior_Incident.csv')\ndf['date_incident_end'] = pd.to_datetime(df['date_incident_end'])\ndf_noise = df[df['incident_type_code'] == 'NOISE']\ndf_noise['incident_end_month'] = df_noise['date_incident_end'] + MonthEnd(0)\nnoise_month_counts = df_noise['incident_end_month'].value_counts().sort_index()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nnoise_month_counts.sort_values(ascending=False).plot(kind='bar', ax=ax)\nax.set_xlabel('Month of Incident End')\nax.set_ylabel('Number of \"NOISE\" Incidents')\nax.set_title('Number of \"NOISE\" Incident End Dates by Month')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
-            "addExample": null
+            "addExample": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom pandas.api.types import CategoricalDtype\n\ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/Behavior_Incident.csv')\ndf['date_incident_end'] = pd.to_datetime(df['date_incident_end'])\ndf['incident_type_code'] = df['incident_type_code'].astype(CategoricalDtype(categories=['NOISE', 'DISTURB', 'VIOLENCE']))\n\nnoise_incidents = df[df['incident_type_code'] == 'NOISE']\nnoise_incidents['month_end'] = noise_incidents['date_incident_end'].dt.to_period('M')\n\nmonth_counts = noise_incidents['month_end'].value_counts().sort_values(ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nmonth_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Month of Incident End')\nax.set_ylabel('Number of NOISE Incidents')\nax.set_title('Number of NOISE Incident End Dates by Month')\nfig.suptitle(\"\")\nplt.xticks(rotation=45)\nplt.show()"
         }
     },
     "3267@y_name@ASC": {
@@ -1252,10 +1252,10 @@
             "belong": "Jing",
             "question": "For each continent where the average life expectancy is shorter than 72, show their total population with a bar chart, display in asc by the sum population.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/world_1/country.csv')\navg_life_expectancy = df.groupby('Continent')['LifeExpectancy'].mean()\ncontinents_below_72 = avg_life_expectancy[avg_life_expectancy < 72].index\ndf_filtered = df[df['Continent'].isin(continents_below_72)]\ntotal_population = df_filtered.groupby('Continent')['Population'].sum().sort_values()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.bar(total_population.index, total_population.values, color='skyblue')\nax.set_xlabel('Continent')\nax.set_ylabel('Total Population')\nax.set_title('Total Population for Continents with Average Life Expectancy < 72')\n\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1265,10 +1265,10 @@
             "belong": "Jing",
             "question": "Find those years for all exhibitions with ticket prices lower than 15, return a bar chart that groups by year and counts the total number of years, and I want to display in ascending by the total number.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Incomplete data display",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv('./visEval_dataset/databases/theme_gallery/exhibition.csv')\nfiltered_df = df[df['Ticket_Price'] < 15]\nyear_counts = filtered_df.groupby('Year').size().reset_index(name='Count')\nyear_counts_sorted = year_counts.sort_values(by='Count')\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.bar(year_counts_sorted['Year'].astype(str), year_counts_sorted['Count'])\nax.set_xlabel('Year')\nax.set_ylabel('Number of Exhibitions')\nplt.title('Number of Exhibitions with Ticket Price < 15 by Year')\nfig.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1278,10 +1278,10 @@
             "belong": "Jing",
             "question": "Find the number of rooms with price higher than 120 for different decor Show bar chart, and list by the Y in descending.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Meaningless Y axis decimal coordinates",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/inn_1/Rooms.csv')\nfiltered_df = df[df['basePrice'] > 120]\ndecor_count = filtered_df['decor'].value_counts().sort_values(ascending=False)\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\ndecor_count.plot(kind='bar', ax=ax)\n\nax.set_xlabel('Decor Style')\nax.set_ylabel('Number of Rooms')\nax.set_title('Number of Rooms with Base Price > 120 by Decor Style')\nplt.suptitle('')\n\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1291,10 +1291,10 @@
             "belong": "Jing",
             "question": "Show me a stacked bar graph, the x-axis is the nationality of ship, and the y-axis is their total number of different nationality and split by ship type, and show X-axis in desc order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/ship_mission/ship.csv')\n\nnationality_counts = df.groupby(['Nationality', 'Type']).size().unstack(fill_value=0)\nnationality_counts = nationality_counts.loc[nationality_counts.sum(axis=1).sort_values(ascending=False).index]\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nnationality_counts.plot(kind='bar', stacked=True, ax=ax)\n\nax.set_title('Ship Type Distribution by Nationality')\nax.set_xlabel('Nationality')\nax.set_ylabel('Number of Ships')\nplt.suptitle('')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1304,10 +1304,10 @@
             "belong": "Jing",
             "question": "Stack bar chart of the number of type vs Nationality based on type, and list x-axis in descending order.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Failed to sort x-axis in descending order",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/ship_mission/ship.csv')\n\ndf_grouped = df.groupby(['Type', 'Nationality']).size().unstack()\n\ndf_grouped = df_grouped.loc[:, df_grouped.sum(axis=0).sort_values(ascending=False).index]\n\nfig, ax = plt.subplots(figsize=(10, 4))\ndf_grouped.plot(kind='bar', stacked=True, ax=ax)\n\nax.set_xlabel('Ship Type')\nax.set_ylabel('Number of Ships')\nax.set_title('Number of Ships by Type and Nationality')\nfig.suptitle('')",
             "addRule": null,
             "addExample": null
         }
@@ -1317,10 +1317,10 @@
             "belong": "Jing",
             "question": "Show the relationship between the number of staff and the score of the shop. Scatter plot is preferred.",
             "hardness": "Extra Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": true,
             "evaluation": null,
-            "code": null,
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/coffee_shop/shop.csv')\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nax.scatter(df['Num_of_staff'], df['Score'], alpha=0.7, edgecolors='w', s=80)\nax.set_xlabel('Number of Staff')\nax.set_ylabel('Score')\nax.set_title('Relationship Between Number of Staff and Shop Score')\n\nplt.suptitle('')\nplt.show()",
             "addRule": null,
             "addExample": null
         }
@@ -1330,12 +1330,12 @@
             "belong": "Jing",
             "question": "From 1973 to 1979, show the maximum acceleration of cars with 4, 6, and 8 cylinders each year. Line chart.",
             "hardness": "Hard",
-            "isDataCorrect": null,
-            "isStyleCorrect": null,
-            "evaluation": null,
-            "code": null,
+            "isDataCorrect": true,
+            "isStyleCorrect": false,
+            "evaluation": "Failed to sort, meaningless subtitle",
+            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('./visEval_dataset/databases/car_1/cars_data.csv')\ndf_filtered = df[(df['Year'] >= 1973) & (df['Year'] <= 1979)]\ndf_grouped = df_filtered.groupby(['Year', 'Cylinders'])['Accelerate'].max().unstack()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\ndf_grouped.plot(ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Max Acceleration')\nax.set_title('Max Acceleration of Cars by Cylinders (1973-1979)')\nplt.suptitle('')\nplt.show()",
             "addRule": null,
-            "addExample": null
+            "addExample": true
         }
     }
 }
