@@ -51,7 +51,7 @@ def is_number_label(label):
     except ValueError:
         return True
 
-json_file_path = "./formatted_testCase.json"
+jsonFile = "./formatted_testCase.json"
 target_key = "942@x_name@DESC"  # target key
-result = check_axis_is_float(json_file_path, target_key)
+result = check_axis_is_float(jsonFile, target_key)
 print("Validation Result:", result)
