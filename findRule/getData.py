@@ -4,7 +4,7 @@ include = [r'\n(\w+).plot\(',r'\n(?:ax|plt).\w+.(\w+)[.[]{1}']
 text = ""
 
 # get the target dataframe string
-def get_dataframe(text,include):
+def get_dataframe(text,include=include):
     res = ""
     for line in include:
         if  re.search(line, text):
