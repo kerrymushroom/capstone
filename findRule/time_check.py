@@ -22,12 +22,13 @@ def date_type(date_string):
 
     return "Unknown"
 
-def checkDates(eva_id, answer):
+def checkDates(eva_id):
 	# specify the path of your data.file
     with open('data.json', 'r') as file:
         data = json.load(file)
 
-    #answer = run_visEval(eva_id,rules, 0, key)
+    # run_visEval would return answer string
+    answer = run_visEval(eva_id,rules, 0, key)
     local_vars = {}
     exec(answer, {}, local_vars)
     df = local_vars[get_dataframe(answer)]    
@@ -36,5 +37,5 @@ def checkDates(eva_id, answer):
     return binning==date_type(str(df.index[0]))
 
 # getDatesResult will return True or False, True means dates formats on x-axis are correct
-def getDatesResult(eva_id, answer):
-	return mask(checkDates,eva_id,answer)
+def getDatesResult(eva_id):
+	return mask(checkDates,eva_id)

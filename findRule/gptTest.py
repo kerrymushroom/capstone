@@ -24,29 +24,17 @@ def run_request(question_to_ask, model_type, key):
                                                   messages=[{"role": "system", "content": task},
                                                             {"role": "user", "content": question_to_ask}])
         llm_response = response.choices[0].message.content
-    # llm_response = format_response(llm_response)
     return llm_response
 
-
-def format_response(res):
-    # Remove the load_csv from the answer if it exists
-    csv_line = res.find("read_csv")
-    if csv_line > 0:
-        return_before_csv_line = res[0:csv_line].rfind("\n")
-        if return_before_csv_line == -1:
-            # The read_csv line is the first line so there is nothing to need before it
-            res_before = ""
-        else:
-            res_before = res[0:return_before_csv_line]
-        res_after = res[csv_line:]
-        return_after_csv_line = res_after.find("\n")
-        if return_after_csv_line == -1:
-            # The read_csv is the last line
-            res_after = ""
-        else:
-            res_after = res_after[return_after_csv_line:]
-        res = res_before + res_after
-    return res
+def get_code(text):
+    text = text.replace("```python","```")
+    marker = "```"
+    findBlock = False
+    start_index = text.find(marker)
+    if start_index != -1:
+        findBlock = True
+        end_index = text.find(marker, start_index + len(marker))
+    return text if not findBlock else text[start_index + len(marker):end_index].strip()
 
 
 def format_question(primer_desc, primer_code, question, model_type):
@@ -111,15 +99,19 @@ def print_output(database_name, df_name, question, key, rules=None, example=None
             # print the query question
             # print(question_to_ask)
             # Run the question
-            answer = ""
             answer = run_request(question_to_ask, available_models[model_type], key=key)
+            answer = get_code(answer)
             # the answer is the completed Python script so add to the beginning of the script to it.
             # answer = primer2 + answer
             print('\n')
             print(answer)
+            # repr could get the orginal string with '\n'
+            print(repr(answer))
             exec(answer)
+            return answer
         except Exception as e:
             print('Error:', e)
+            return None
     else:
         raise ValueError("Error: please initialize key first.")
 
@@ -133,4 +125,4 @@ def run_visEval(question_serial, question_index, key):
         print('\n')
         print(question_serial + ' - ' + str(question_index) + ': ')
         print(question + '\n')
-        print_output(database_name, df_name, question, key)
+        return print_output(database_name, df_name, question, key)
