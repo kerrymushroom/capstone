@@ -14,11 +14,12 @@ def date_type(date_string):
     if date_string.isdigit() and 1 <= len(date_string) <= 4:
         return "YEAR"
 
-    try:
-        datetime.strptime(date_string, "%B") 
-        return "MONTH"
-    except ValueError:
-        pass
+    for fmt in ("%B", "%b"):  
+        try:
+            datetime.strptime(date_string, fmt)
+            return "MONTH"
+        except ValueError:
+            continue
 
     return "Unknown"
 
