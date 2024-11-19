@@ -277,12 +277,12 @@
             "belong": "Kerry",
             "question": "For all employees who have the letters D or S in their first name, visualize a line chart about the change of  salary over  hire_date .",
             "hardness": "Hard",
-            "isDataCorrect": true,
+            "isDataCorrect": false,
             "isStyleCorrect": false,
-            "evaluation": "X label overlapped",
+            "evaluation": "Incorrectly considered the case sensitivity , X label overlapped",
             "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv(\"./visEval_dataset/databases/hr_1/employees.csv\")\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\nfiltered_df = df[df['FIRST_NAME'].str.contains(\"D|S\")]\nsorted_df = filtered_df.sort_values('HIRE_DATE')\nplt.plot(sorted_df['HIRE_DATE'], sorted_df['SALARY'])\nplt.xlabel('Hire Date')\nplt.ylabel('Salary')\nplt.title('Salary Change Over Time for Employees with D or S in First Name')\nplt.suptitle('')\nplt.show()",
             "addRule": "If axis labels are too crowded, you can rotate the label for a better arrangement.",
-            "addExample": null
+            "addExample": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv(\"./visEval_dataset/databases/hr_1/employees.csv\")\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\nfiltered_df = df[df['FIRST_NAME'].str.contains(\"D|S|d|s\")]\nsorted_df = filtered_df.sort_values('HIRE_DATE')\nplt.plot(sorted_df['HIRE_DATE'], sorted_df['SALARY'])\nplt.xlabel('Hire Date')\nplt.ylabel('Salary')\nplt.title('Salary Change Over Time for Employees with D or S in First Name')\nplt.suptitle('')\nplt.show()"
         }
     },
     "1563": {
