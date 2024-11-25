@@ -68,6 +68,14 @@ def eval_data_check(question_serial, question_index, answer):
                 return 0
             return 1
 
+        elif isinstance(answer_df, pd.Series):
+            answer_list = answer_df.index.tolist() + answer_df.tolist()
+
+            if not are_lists_equal(standard_list, answer_list, binning):
+                # print('standard_list:', standard_list)
+                # print('answer_list:', answer_list)
+                return 0
+            return 1
         else:
             try:
                 match = re.search(r"\.plot\((.*?)\)", answer)
@@ -75,6 +83,7 @@ def eval_data_check(question_serial, question_index, answer):
                     content = match.group(1)
                     variables = re.findall(r"[\w\.]+\[.*?\]", content)
                     print("Extracted variables:", variables)
+                    variables = flatten_list([variables])
 
                     # Multiple data series
                     # if len(variables) > 2:
@@ -88,24 +97,25 @@ def eval_data_check(question_serial, question_index, answer):
                         return 0
                     else:
                         return 1
-                    # else:
-                    #     answer_x = eval(variables[0])
-                    #     answer_y = eval(variables[1])
-                    #     if not are_lists_equal(standard_x, answer_x):
-                    #         print('standard_x:', standard_x)
-                    #         print('answer_x:', answer_x)
-                    #         return 0
-                    #     if not are_lists_equal(standard_y, answer_y):
-                    #         print('standard_y:', standard_y)
-                    #         print('answer_y:', answer_y)
-                    #         return 0
-                    #     return 1
                 else:
                     return -1
             except Exception as e:
                 print(e)
                 return -1
-        return -1
+    else:
+        match = re.findall(r"ax\.[a-zA-Z]+\(([^\'\"].*?)\)", answer)
+        if match:
+            answer_list = []
+            for content in match:
+                variables = re.findall(r'(?:^|,)\s*(\b(?![\d])\w+\b)(?![^,]*=)', content)
+                for var in variables:
+                    answer_list.extend(eval(var))
+            if not are_lists_equal(standard_list, answer_list, binning):
+                print('standard_list:', standard_list)
+                print('answer_list:', answer_list)
+                return 0
+            return 1
+    return -1
 
 
 def are_lists_equal(list1, list2, binning):
