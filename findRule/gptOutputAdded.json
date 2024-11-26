@@ -6,7 +6,7 @@
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Rotated x-axis",
       "fig_data": {
         "x_data": [
@@ -61,7 +61,7 @@
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Rotated x-axis",
       "fig_data": {
         "x_data": [
@@ -226,7 +226,7 @@
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Rotated x-axis",
       "fig_data": {
         "x_data": [
@@ -426,7 +426,7 @@
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Wrong order of the weekdays",
       "fig_data": {
         "x_data": [
@@ -512,7 +512,7 @@
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Wrong order of the weekdays",
       "fig_data": {
         "x_data": [
@@ -673,7 +673,7 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
+      "check_overflow": false,
       "check_overlap": "",
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv(\"./visEval_dataset/databases/behavior_monitoring/Student_Addresses.csv\")\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['weekday'] = df['date_address_from'].dt.day_name()\n\navg_rental = df.groupby(['other_details', 'weekday'])['monthly_rental'].mean().unstack()\n\nfig, ax = plt.subplots(figsize=(10, 4))\navg_rental.plot(kind='bar', ax=ax)\nax.set_xlabel('Other Details')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Average Monthly Rental by Weekday and Other Details')\nfig.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
       "addRule": null,
@@ -734,7 +734,7 @@
       "hardness": "Hard",
       "chart": "Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Wrong order of the weekdays",
       "fig_data": {
         "x_data": [
@@ -781,7 +781,7 @@
       "hardness": "Hard",
       "chart": "Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Wrong order of the weekdays",
       "fig_data": {
         "x_data": [
@@ -828,7 +828,7 @@
       "hardness": "Hard",
       "chart": "Bar",
       "isDataCorrect": true,
-      "isStyleCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": "Wrong order of the weekdays",
       "fig_data": {
         "x_data": [
@@ -1447,7 +1447,7 @@
       "check_run": true,
       "check_dates": null,
       "check_overflow": "",
-      "check_overlap": "",
+      "check_overlap": false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv(\"./visEval_dataset/databases/hr_1/employees.csv\")\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\nfiltered_df = df[df['FIRST_NAME'].str.contains(\"D|S\")]\nsorted_df = filtered_df.sort_values('HIRE_DATE')\nplt.plot(sorted_df['HIRE_DATE'], sorted_df['SALARY'])\nplt.xlabel('Hire Date')\nplt.ylabel('Salary')\nplt.title('Salary Change Over Time for Employees with D or S in First Name')\nplt.suptitle('')\nplt.show()",
       "addRule": "If axis labels are too crowded, you can rotate the label for a better arrangement.",
       "addExample": "import pandas as pd\nimport matplotlib.pyplot as plt\ndf = pd.read_csv(\"./visEval_dataset/databases/hr_1/employees.csv\")\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\nfiltered_df = df[df['FIRST_NAME'].str.contains(\"D|S|d|s\")]\nsorted_df = filtered_df.sort_values('HIRE_DATE')\nplt.plot(sorted_df['HIRE_DATE'], sorted_df['SALARY'])\nplt.xlabel('Hire Date')\nplt.ylabel('Salary')\nplt.title('Salary Change Over Time for Employees with D or S in First Name')\nplt.suptitle('')\nplt.show()"

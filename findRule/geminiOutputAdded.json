@@ -5,7 +5,7 @@
       "question": "Show me about the distribution of date_address_to and the amount of date_address_to, and group by attribute other_details and bin date_address_to by month in a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -47,8 +47,8 @@
       "binning": "MONTH",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap": true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'behavior_monitoring'\ndf_name = 'student_addresses'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['month'] = df['date_address_to'].dt.to_period('M')\nmonthly_rental_by_month_and_type = df.groupby(['month', 'other_details'])['monthly_rental'].sum().unstack()\nmonthly_rental_by_month_and_type.plot(kind='bar', ax=ax)\nax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))\nax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))\nax.set_xlabel('Date Address To (Month)')\nax.set_ylabel('Sum of Monthly Rental')\nax.set_title('Distribution of Monthly Rental by Date Address To and Housing Type')\nfig.suptitle('')\nplt.xticks(rotation=45, ha='right')\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -60,7 +60,7 @@
       "question": "Show me about the distribution of date_address_to and the sum of monthly_rental, and group by attribute other_details and bin date_address_to by month in a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": true,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -102,8 +102,8 @@
       "binning": "MONTH",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap": true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['month'] = df['date_address_to'].dt.to_period('M')\nmonthly_rental_by_month_and_type = df.groupby(['month','other_details'])['monthly_rental'].sum().unstack()\nmonthly_rental_by_month_and_type.plot(kind='bar',ax=ax)\nax.set_xlabel('Month')\nax.set_ylabel('Sum of Monthly Rental')\nax.set_title('Distribution of Monthly Rental by Address Type and Month')\nfig.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -115,7 +115,7 @@
       "question": "Give me the comparison about the average of monthly_rental over the  date_address_to , and group by attribute other_details and bin date_address_to by month by a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": true,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -157,8 +157,8 @@
       "binning": "MONTH",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['month'] = df['date_address_to'].dt.to_period('M')\nmonthly_rental_by_month_and_type = df.groupby(['month', 'other_details'])['monthly_rental'].mean().unstack()\nmonthly_rental_by_month_and_type.plot(kind='bar', ax=ax)\nax.set_xlabel('Month')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Average Monthly Rental by Address Type and Month')\nfig.suptitle('')\nplt.xticks(rotation=45)\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -170,8 +170,8 @@
       "question": "A bar chart shows the distribution of  date_address_from and the amount of date_address_from , and group by attribute other_details and bin date_address_from by year.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -212,8 +212,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['year'] = df['date_address_from'].dt.year\ndf_grouped = df.groupby(['year','other_details'])['date_address_from'].count().unstack()\ndf_grouped.plot(kind='bar',ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Count of Addresses')\nax.set_title('Distribution of Address Start Dates by Year and Housing Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -225,8 +225,8 @@
       "question": "Give me the comparison about the sum of monthly_rental over the  date_address_from , and group by attribute other_details and bin date_address_from by year by a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -267,8 +267,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['year'] = df['date_address_from'].dt.year\ndf_grouped = df.groupby(['year','other_details'])['monthly_rental'].sum().unstack()\ndf_grouped.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Sum of Monthly Rental')\nax.set_title('Sum of Monthly Rental by Year and Housing Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -280,8 +280,8 @@
       "question": "Visualize a bar chart about the distribution of  date_address_from and the average of monthly_rental , and group by attribute other_details and bin date_address_from by year.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -322,8 +322,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\ndatabase_name = \"behavior_monitoring\"\ndf_name = \"student_addresses\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['year'] = df['date_address_from'].dt.year\ndf_grouped = df.groupby(['other_details', 'year'])['monthly_rental'].mean().unstack()\ndf_grouped.plot(kind='bar', ax=ax)\nax.set_xlabel('Other Details')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Distribution of Date Address From and Average Monthly Rental by Other Details')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -335,7 +335,7 @@
       "question": "Find  date_address_to and the sum of monthly_rental , and group by attribute other_details and bin date_address_to by weekday, and visualize them by a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -408,8 +408,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['weekday'] = df['date_address_to'].dt.dayofweek\ndf_grouped = df.groupby(['other_details', 'weekday'])['monthly_rental'].sum().unstack()\ndf_grouped.plot(kind='bar', ax=ax)\nax.set_xlabel('Other Details')\nax.set_ylabel('Sum of Monthly Rental')\nax.set_title('Sum of Monthly Rental by Other Details and Weekday')\nfig.suptitle('')\nplt.xticks(rotation=0)\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -421,7 +421,7 @@
       "question": "Find  date_address_to and the average of monthly_rental , and group by attribute other_details and bin date_address_to by weekday, and visualize them by a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -494,8 +494,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_to'] = pd.to_datetime(df['date_address_to'])\ndf['weekday'] = df['date_address_to'].dt.dayofweek\ndf['weekday'] = df['weekday'].astype(str)\nresult = df.groupby(['other_details','weekday'])['monthly_rental'].mean().unstack()\nresult.plot(kind='bar',ax=ax)\nax.set_xlabel('Other Details')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Average Monthly Rental by Other Details and Weekday')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -507,8 +507,8 @@
       "question": "Give me the comparison about the sum of monthly_rental over the  date_address_from , and group by attribute other_details and bin date_address_from by weekday by a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -584,8 +584,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/student_addresses.csv')\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['weekday'] = df['date_address_from'].dt.dayofweek\ndf['weekday_name'] = df['date_address_from'].dt.day_name()\nrental_by_weekday = df.groupby(['other_details', 'weekday_name'])['monthly_rental'].sum().unstack()\nrental_by_weekday.plot(kind='bar', ax=ax)\nax.set_xlabel('Weekday')\nax.set_ylabel('Sum of Monthly Rental')\nax.set_title('Sum of Monthly Rental by Weekday and Housing Type')\nfig.suptitle('')\nplt.xticks(rotation=45, ha='right')\nplt.tight_layout()\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -597,7 +597,7 @@
       "question": "Draw a bar chart about the distribution of  date_address_from and the average of monthly_rental , and group by attribute other_details and bin date_address_from by weekday.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": true,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -660,8 +660,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfrom datetime import datetime\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = \"behavior_monitoring\"\ndf_name = \"student_addresses\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ndf['date_address_from'] = pd.to_datetime(df['date_address_from'])\ndf['weekday'] = df['date_address_from'].dt.dayofweek\ndf['month'] = df['date_address_from'].dt.month\n\npivot_df = df.pivot_table(index=['weekday', 'other_details'], values='monthly_rental', aggfunc='mean')\npivot_df = pivot_df.unstack()\n\npivot_df.plot(kind='bar', ax=ax)\n\nax.set_xlabel('Weekday')\nax.set_ylabel('Average Monthly Rental')\nax.set_title('Distribution of Date Address From and Average Monthly Rental')\nfig.suptitle('')\nplt.xticks(rotation=0)\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -673,8 +673,8 @@
       "question": "For the days with the 3 largest maximum wind speeds, show me the frequency of their corresponding date in the weekdays level using a bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -707,8 +707,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport calendar\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'bike_1'\ndf_name = 'weather'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf['weekday'] = df['date'].dt.day_name()\ntop_wind_days = df.nlargest(3, 'max_wind_Speed_mph')['date']\nweekday_counts = df[df['date'].isin(top_wind_days)]['weekday'].value_counts()\nweekday_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Weekday')\nax.set_ylabel('Frequency')\nax.set_title('Frequency of Top 3 Maximum Wind Speed Days by Weekday')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -720,8 +720,8 @@
       "question": "For the top 3 days with the largest max wind speeds, please bin the date into the day of the week and then sum the mean temperature for a bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": false,
+      "isDataCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -741,8 +741,8 @@
       "binning": "WEEKDAY",
       "check_run": "Error: name 'calendar' is not defined",
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport calendar\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"bike_1\"\ndf_name = \"weather\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ntop_3_wind = df.nlargest(3, 'max_wind_Speed_mph')\ntop_3_wind['day_of_week'] = pd.to_datetime(top_3_wind['date']).dt.dayofweek\ntop_3_wind['day_name'] = top_3_wind['day_of_week'].apply(lambda x: calendar.day_name[x])\ntemp_by_day = top_3_wind.groupby('day_name')['mean_temperature_f'].sum()\ntemp_by_day.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Sum of Mean Temperature (\u00b0F)')\nax.set_title('Sum of Mean Temperature for Top 3 Days with Highest Max Wind Speed')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -754,8 +754,8 @@
       "question": "For the top 3 days with the largest max wind speeds, please bin the date into day of the week and then sum the mean humidity to visualize a bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -798,8 +798,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport calendar\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'bike_1'\ndf_name = 'weather'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf['day_of_week'] = df['date'].dt.day_name()\ntop_3_wind = df.nlargest(3, 'max_wind_Speed_mph')\ntop_3_wind['day_of_week'] = pd.Categorical(top_3_wind['day_of_week'], categories=list(calendar.day_name),ordered=True)\nresult = top_3_wind.groupby('day_of_week')['mean_humidity'].sum()\nresult.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Sum of Mean Humidity')\nax.set_title('Sum of Mean Humidity for Top 3 Days with Highest Max Wind Speed')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -811,8 +811,8 @@
       "question": "For the top 3 days with the largest max wind speeds, please bin the date into the of the week and then compute the average of mean humidity to visualize a bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -845,8 +845,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = \"bike_1\"\ndf_name = \"weather\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ntop_3_wind = df.nlargest(3, 'max_wind_Speed_mph')\ntop_3_wind['date'] = pd.to_datetime(top_3_wind['date'])\ntop_3_wind['day_of_week'] = top_3_wind['date'].dt.dayofweek\navg_humidity_by_day = top_3_wind.groupby('day_of_week')['mean_humidity'].mean()\n\navg_humidity_by_day.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Average Mean Humidity')\nax.set_title('Average Mean Humidity for Top 3 Days with Highest Max Wind Speed')\nfig.suptitle('')\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -858,8 +858,8 @@
       "question": "Give me the proportion of end stations for the trips with the three oldest id using a pie chart.",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -879,8 +879,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ndatabase_name = 'bike_1'\ndf_name = 'trip'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\noldest_trips = df.nsmallest(3, 'id')\nend_station_counts = oldest_trips['end_station_id'].value_counts()\nax.pie(end_station_counts, labels=end_station_counts.index, autopct='%1.1f%%', startangle=140)\nax.axis('equal')\nax.set_xlabel('End Station ID')\nax.set_ylabel('Proportion of Trips')\nax.set_title('Proportion of End Stations for the Three Oldest Trips')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -892,8 +892,8 @@
       "question": "What are the first names of all employees that are professors ordered by date of birth, and count them by a bar chart",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -998,8 +998,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'college_1'\ndf_name = 'employee'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nprofessors = df[df['EMP_JOBCODE'] == 'PROF']\nprofessors = professors.sort_values('EMP_DOB')\nfirst_names = professors['EMP_FNAME']\nname_counts = first_names.value_counts()\nname_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('First Name')\nax.set_ylabel('Count')\nax.set_title('First Names of Professors Ordered by Date of Birth')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -1011,9 +1011,9 @@
       "question": "Find the last name of female (sex is F) students in the descending order of age, and count them by a bar chart",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
-      "evaluation": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
+      "evaluation": "nvBench answer is wrong",
       "fig_data": {
         "x_data": [
           [
@@ -1073,8 +1073,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'college_3'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nfemale_students = df[df['Sex'] == 'F'].sort_values('Age', ascending=False)\nlname_counts = female_students['LName'].value_counts()\nlname_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Count')\nax.set_title('Count of Female Students by Last Name (Descending Order of Age)')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -1086,8 +1086,8 @@
       "question": "Give me a group line chart showing the number of days with max humidity higher than 80 in different area each year.",
       "hardness": "Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -1164,8 +1164,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"bike_1\"\ndf_name = \"weather\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf['year'] = df['date'].dt.year\ndf['high_humidity'] = (df['max_humidity'] > 80).astype(int)\nhumidity_by_year = df.groupby(['year', 'zip_code'])['high_humidity'].sum().unstack()\nhumidity_by_year.plot(kind='line', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Days with Max Humidity > 80')\nax.set_title('Number of Days with Max Humidity > 80 per Year by Zip Code')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -1177,8 +1177,8 @@
       "question": "Show the number of products with price higher than 1000 or lower than 500 for each product type code in a pie chart.",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -1197,9 +1197,9 @@
       },
       "binning": "",
       "check_run": "Error: '<500'",
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": false,
+      "check_overflow": false,
+      "check_overlap":  false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\ndf['price_range'] = pd.cut(df['product_price'], bins=[-float('inf'), 500, 1000, float('inf')], labels=['<500', '500-1000', '>1000'], right=False)\nprice_range_counts = df.groupby(['product_type_code', 'price_range']).size().unstack()\nprice_range_counts = price_range_counts[['<500', '>1000']]\nprice_range_counts = price_range_counts.rename(columns={'<500':'<500 or >1000'})\nprice_range_counts['<500 or >1000'] = price_range_counts['<500'] + price_range_counts['>1000']\nprice_range_counts = price_range_counts.drop(columns=['<500', '>1000'])\nprice_range_counts.plot(kind='pie', subplots=True, autopct='%1.1f%%', figsize=(10, 4), ax=ax, y='<500 or >1000', labels=price_range_counts.index)\nax.set_ylabel('')\nax.set_xlabel('')\nax.set_title('Number of Products with Price <500 or >1000 per Product Type')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -1211,8 +1211,8 @@
       "question": "Show the number of products with price higher than 1000 or lower than 500 for each product name in a pie chart.",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -1259,8 +1259,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\ndf['price_range'] = pd.cut(df['product_price'], bins=[-float('inf'), 500, 1000, float('inf')], labels=['<500', '500-1000', '>1000'], right=False)\nprice_counts = df.groupby('product_name')['price_range'].value_counts().unstack()\nprice_counts = price_counts[['<500', '>1000']].fillna(0)\nprice_counts['total'] = price_counts['<500'] + price_counts['>1000']\nprice_counts_percentage = price_counts[['<500', '>1000']].div(price_counts['total'], axis=0) * 100\nprice_counts_percentage.plot(kind='pie', subplots=True, autopct='%1.1f%%', figsize=(12, 6), ax=ax,  title='Number of Products with Price <500 or >1000 per Product Name')\nax.set_ylabel('')\nfig.suptitle('')\nplt.xlabel('Product Name')\nplt.ylabel('Percentage')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -1272,8 +1272,8 @@
       "question": "List the number of games in each season and group by home team in a group line chart.",
       "hardness": "Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -1362,8 +1362,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'game_injury'\ndf_name = 'game'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ngames_per_season = df.groupby(['Season', 'Home_team']).size().unstack()\ngames_per_season.plot(kind='line', ax=ax)\nax.set_xlabel('Season')\nax.set_ylabel('Number of Games')\nax.set_title('Number of Games per Season by Home Team')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -1375,8 +1375,8 @@
       "question": "For all employees who have the letters D or S in their first name, visualize a line chart about the change of  salary over  hire_date .",
       "hardness": "Hard",
       "chart": "Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -1488,8 +1488,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport re\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\ndf_filtered = df[df['FIRST_NAME'].str.contains('[DS]', flags=re.IGNORECASE, regex=True)]\ndf_filtered = df_filtered.sort_values('HIRE_DATE')\nax.plot(df_filtered['HIRE_DATE'],df_filtered['SALARY'])\nax.set_xlabel('Hire Date')\nax.set_ylabel('Salary')\nax.set_title('Salary Change Over Hire Date for Employees with D or S in First Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -1501,8 +1501,8 @@
       "question": "For all employees who have the letters D or S in their first name, show me about the distribution of  job_id and the average of salary , and group by attribute job_id in a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -1575,8 +1575,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['FIRST_NAME'] = df['FIRST_NAME'].astype(str)\ndf_filtered = df[df['FIRST_NAME'].str.contains('[DS]',case=False)]\ngrouped = df_filtered.groupby('JOB_ID')['SALARY'].mean().reset_index()\ngrouped.plot(kind='bar',x='JOB_ID',y='SALARY',ax=ax)\nax.set_xlabel('Job ID')\nax.set_ylabel('Average Salary')\nax.set_title('Average Salary by Job ID for Employees with \"D\" or \"S\" in First Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -1588,8 +1588,8 @@
       "question": "For all employees who have the letters D or S in their first name, show me about the correlation between  salary and  commission_pct  in a scatter chart.",
       "hardness": "Hard",
       "chart": "Scatter",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -1994,8 +1994,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/hr_1/employees.csv')\ndf_filtered = df[df['FIRST_NAME'].str.contains('[DS]')].copy()\ndf_filtered.plot(kind='scatter', x='SALARY', y='COMMISSION_PCT', ax=ax)\nax.set_xlabel('Salary')\nax.set_ylabel('Commission Percentage')\nax.set_title('Correlation between Salary and Commission Percentage for Employees with \"D\" or \"S\" in their First Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2007,8 +2007,8 @@
       "question": "For those employees whose salary is in the range of 8000 and 12000 and commission is not null or department number does not equal to 40, visualize a bar chart about the distribution of  hire_date and the amount of hire_date bin hire_date by month.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2052,9 +2052,9 @@
       },
       "binning": "MONTH",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": false,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/hr_1/employees.csv')\n\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\ndf_filtered = df[(df['SALARY'] >= 8000) & (df['SALARY'] <= 12000) & ((~df['COMMISSION_PCT'].isnull()) | (df['DEPARTMENT_ID'] != 40))]\ndf_filtered['hire_month'] = df_filtered['HIRE_DATE'].dt.to_period('M')\nhire_date_counts = df_filtered['hire_month'].value_counts().sort_index()\n\nax.bar(hire_date_counts.index.astype(str), hire_date_counts.values)\nax.xaxis.set_major_locator(plt.MaxNLocator(12))\nax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))\nplt.xticks(rotation=45, ha=\"right\")\nax.set_xlabel('Hire Date (Month)')\nax.set_ylabel('Number of Employees')\nax.set_title('Distribution of Hire Dates (Salary 8000-12000, Commission Not Null or Department != 40)')\nfig.suptitle('')\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2066,8 +2066,8 @@
       "question": "For employees with first names that end with the letter 'm', groups and counts the first name to visualize a pie graph.",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2104,8 +2104,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"hr_1\"\ndf_name = \"employees\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_m = df[df['FIRST_NAME'].str.endswith('m')]\nname_counts = df_m['FIRST_NAME'].value_counts()\nname_counts.plot(kind='pie',ax=ax, autopct='%1.1f%%',title='Distribution of First Names Ending in \"m\"')\nax.set_ylabel('')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -2117,8 +2117,8 @@
       "question": "For those employees whose first name does not contain the letter M, sum their salary by binning the hire date into the day of week interval for visualizing a bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2170,9 +2170,9 @@
       },
       "binning": "WEEKDAY",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": false,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\ndf['DAY_OF_WEEK'] = df['HIRE_DATE'].dt.dayofweek\ndf['FIRST_NAME'] = df['FIRST_NAME'].str.lower()\ndf_filtered = df[~df['FIRST_NAME'].str.contains('m')]\nsalary_by_day = df_filtered.groupby('DAY_OF_WEEK')['SALARY'].sum()\nsalary_by_day.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of Week')\nax.set_ylabel('Total Salary')\nax.set_title('Total Salary by Day of Week (Employees without \"M\" in First Name)')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2184,8 +2184,8 @@
       "question": "What are the payment date of the payment with amount paid higher than 300 or with payment type is 'Check', bin the payment date by month and count them by a bar chart",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2217,9 +2217,9 @@
       },
       "binning": "MONTH",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": false,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndatabase_name = 'products_for_hire'\ndf_name = 'payments'\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['payment_date'] = pd.to_datetime(df['payment_date'])\ndf['month'] = df['payment_date'].dt.to_period('M')\nfiltered_df = df[(df['amount_paid'] > 300) | (df['payment_type_code'] == 'Check')]\nmonthly_counts = filtered_df.groupby('month')['payment_id'].count()\nmonthly_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Payment Month')\nax.set_ylabel('Number of Payments')\nax.set_title('Number of Payments with Amount Paid > 300 or Payment Type = Check, Binned by Month')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2231,8 +2231,8 @@
       "question": "What are the payment date of the payment with amount paid higher than 300 or with payment type is 'Check, and count them by a line chart",
       "hardness": "Hard",
       "chart": "Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -2265,9 +2265,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"products_for_hire\"\ndf_name = \"payments\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['payment_date'] = pd.to_datetime(df['payment_date'])\nfiltered_df = df[(df['amount_paid'] > 300) | (df['payment_type_code'] == 'Check')]\npayment_counts = filtered_df.groupby('payment_date')['payment_id'].count().reset_index()\npayment_counts = payment_counts.sort_values(by='payment_date')\nax.plot(payment_counts['payment_date'],payment_counts['payment_id'])\nax.set_xlabel('Payment Date')\nax.set_ylabel('Number of Payments')\nax.set_title('Number of Payments with Amount Paid > 300 or Payment Type = Check')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2279,8 +2279,8 @@
       "question": "Show the countries that have managers of age above 50 or below 46, and count them by a pie chart",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2317,8 +2317,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"railway\"\ndf_name = \"manager\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[(df['Age'] > 50) | (df['Age'] < 46)]\ncountry_counts = df_filtered['Country'].value_counts()\ncountry_counts.plot(kind='pie', autopct='%1.1f%%', ax=ax)\nax.set_ylabel('')\nax.set_title('Countries with Managers Above 50 or Below 46 Years Old')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -2330,8 +2330,8 @@
       "question": "Show the countries that have managers of age above 50 or below 46, and count them by a bar chart",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2368,8 +2368,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'railway'\ndf_name = 'manager'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[(df['Age'] > 50) | (df['Age'] < 46)]\ncountry_counts = df_filtered['Country'].value_counts()\ncountry_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of Managers')\nax.set_title('Countries with Managers Above 50 or Below 46 Years Old')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -2381,8 +2381,8 @@
       "question": "What is the total number of captains in each rank and class? Let class as X-axis, and categorize by rank with a stacked bar chart.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2455,8 +2455,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'ship_1'\ndf_name = 'captain'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nct = pd.crosstab(df['Class'],df['Rank'])\nct.plot(kind='bar',stacked=True,ax=ax)\nax.set_xlabel('Class')\nax.set_ylabel('Number of Captains')\nax.set_title('Total Number of Captains in Each Rank and Class')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2468,8 +2468,8 @@
       "question": "What are the top 5 countries by number of invoices and how many do they have. Plot them as bar chart.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2514,8 +2514,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'store_1'\ndf_name = 'invoices'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ncountry_counts = df['billing_country'].value_counts().nlargest(5)\ncountry_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of Invoices')\nax.set_title('Top 5 Countries by Number of Invoices')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -2527,8 +2527,8 @@
       "question": "Show me a bar chart for what are the names of the countries and average invoice size of the top countries by size?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2593,8 +2593,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'store_1'\ndf_name = 'invoices'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ntop_countries = df.groupby('billing_country')['total'].mean().nlargest(10)\ntop_countries.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Average Invoice Size')\nax.set_title('Top 10 Countries by Average Invoice Size')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -2606,8 +2606,8 @@
       "question": "Draw a bar chart for what are the names of the top 8 countries by total invoice size and what are those sizes?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2664,8 +2664,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndatabase_name = 'store_1'\ndf_name = 'invoices'\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ntop_8_countries = df.groupby('billing_country')['total'].sum().nlargest(8)\ntop_8_countries.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Total Invoice Size')\nax.set_title('Top 8 Countries by Total Invoice Size')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2677,8 +2677,8 @@
       "question": "A bar chart for what are the number of the dates of transactions with at least 100 share count or amount bigger than 100? Bin date by weekday.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2729,8 +2729,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/tracking_share_transactions/transactions.csv')\ndf['date_of_transaction'] = pd.to_datetime(df['date_of_transaction'])\ndf['weekday'] = df['date_of_transaction'].dt.day_name()\ndf_filtered = df[(df['share_count'] >= 100) | (df['amount_of_transaction'] > 100)]\nweekday_counts = df_filtered.groupby('weekday')['date_of_transaction'].count()\nweekday_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Weekday')\nax.set_ylabel('Number of Transactions')\nax.set_title('Number of Transactions with at least 100 shares or amount > 100, binned by weekday')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2742,9 +2742,9 @@
       "question": "A bar chart shows the number of appellations whose score is higher than 93, and ordered by Name.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
-      "evaluation": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
+      "evaluation": "nvBench is wrong",
       "fig_data": {
         "x_data": [
           [
@@ -2836,8 +2836,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'wine_1'\ndf_name = 'wine'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nhigh_score_appellations = df[df['Score'] > 93]['Appelation'].value_counts().sort_index()\nhigh_score_appellations.plot(kind='bar', ax=ax)\nax.set_xlabel('Appelation')\nax.set_ylabel('Number of Wines')\nax.set_title('Number of Appellations with Score > 93')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2849,8 +2849,8 @@
       "question": "For those wines whose price is bigger than 100, group by grape, count their total number of each year and sort by year in asc in a bar chart.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2907,8 +2907,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"wine_1\"\ndf_name = \"wine\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['Price'] > 100]\ndf_grouped = df_filtered.groupby(['Grape', 'Year']).size().unstack(fill_value=0)\ndf_sorted = df_grouped.sort_index(axis=1)\ndf_sorted.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Grape')\nax.set_ylabel('Number of Wines')\nax.set_title('Number of Wines per Grape and Year (Price > 100)')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -2920,8 +2920,8 @@
       "question": "A bar chart listing the number of wines whose price is bigger than 100 ordered by year.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -2958,8 +2958,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"wine_1\"\ndf_name = \"wine\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['Price'] > 100]\nprice_by_year = df_filtered.groupby('Year')['Price'].count()\nprice_by_year.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Wines (Price > 100)')\nax.set_title('Number of Wines with Price > 100 Ordered by Year')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -2971,8 +2971,8 @@
       "question": "List the number of games in each season and group by away team in a group line chart, and order in asc by the X-axis please.",
       "hardness": "Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3061,8 +3061,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'game_injury'\ndf_name = 'game'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ngames_per_season = df.groupby(['Season', 'Away_team'])['id'].count().unstack()\ngames_per_season = games_per_season.reindex(sorted(games_per_season.columns), axis=1)\ngames_per_season.plot(kind='line', ax=ax)\nax.set_xlabel('Season')\nax.set_ylabel('Number of Games')\nax.set_title('Number of Games per Season by Away Team')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3074,8 +3074,8 @@
       "question": "Stacked bar chart of how many away team for with each Home_team in each away team, rank from low to high by the y-axis.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3132,8 +3132,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'game_injury'\ndf_name = 'game'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\naway_team_counts = df.groupby(['Home_team', 'Away_team'])['Away_team'].count().unstack()\naway_team_counts = away_team_counts.reindex(columns=['Pakhtakor', 'Quruvchi', 'Bunyodkor'])\naway_team_counts = away_team_counts.sort_values(by='Pakhtakor', ascending=True)\naway_team_counts.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Home Team')\nax.set_ylabel('Number of Away Games')\nax.set_title('Stacked Bar Chart of Away Teams for Each Home Team')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3145,8 +3145,8 @@
       "question": "List the number of games for each home team and group by away team in a stacked bar chart The x-axis is home team, and I want to list x-axis in descending order.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3203,8 +3203,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'game_injury'\ndf_name = 'game'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nhome_away_count = df.groupby(['Home_team', 'Away_team']).size().unstack()\nhome_away_count = home_away_count.reindex(home_away_count.sum(axis=1).sort_values(ascending=False).index)\nhome_away_count.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Home Team')\nax.set_ylabel('Number of Games')\nax.set_title('Number of Games for Each Home Team Grouped by Away Team')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3216,8 +3216,8 @@
       "question": "How many flights with price higher than 300 for each destination city? Return a bar chart, and order in ascending by the total number.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3250,8 +3250,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"flight_1\"\ndf_name = \"flight\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['price'] > 300]\ndestination_counts = df_filtered['destination'].value_counts().sort_values()\ndestination_counts.plot(kind='barh', ax=ax)\nax.set_xlabel('Number of Flights')\nax.set_ylabel('Destination City')\nax.set_title('Number of Flights with Price > 300 per Destination')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3263,10 +3263,10 @@
       "question": "For those dates with a max temperature greater than or equal to 80, I want to know the number of days on the day of the week interval using a bar chart, could you show from high to low by the Y?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": false,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
-      "fig_data": null,
+      "fig_data": "nvBench data were wrong",
       "nv_data": {
         "x_data": [
           [
@@ -3293,9 +3293,9 @@
       },
       "binning": "WEEKDAY",
       "check_run": true,
-      "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'bike_1'\ndf_name = 'weather'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf['day_of_week'] = df['date'].dt.day_name()\ndf_filtered = df[df['max_temperature_f'] >= 80]\nday_counts = df_filtered['day_of_week'].value_counts()\nsns.barplot(x=day_counts.index, y=day_counts.values, ax=ax, order=day_counts.index)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Number of Days')\nax.set_title('Number of Days with Max Temperature >= 80\u00b0F by Day of the Week')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3307,8 +3307,8 @@
       "question": "Use a line chart to show the change in maximum temperature among all regions in July 2015, with the x-axis in ascending order,Complete monthly data is required.",
       "hardness": "Hard",
       "chart": "Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -3385,9 +3385,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"bike_1\"\ndf_name = \"weather\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf_july_2015 = df[(df['date'].dt.year == 2015) & (df['date'].dt.month == 7)]\ndf_july_2015 = df_july_2015.sort_values(by='date')\nax.plot(df_july_2015['date'], df_july_2015['max_temperature_f'])\nax.set_xlabel('Date')\nax.set_ylabel('Maximum Temperature (\u00b0F)')\nax.set_title('Change in Maximum Temperature in July 2015')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -3399,8 +3399,8 @@
       "question": "Count those days for each year and in which zip code was the min dew point lower than any day in zip code 94107 using a bar graph, and display the number of date in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3437,8 +3437,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = 'bike_1'\ndf_name = 'weather'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ndf['date'] = pd.to_datetime(df['date'])\ndf['year'] = df['date'].dt.year\ndf['zip_code'] = df['zip_code'].astype(str)\n\nmin_dew_point_94107 = df[df['zip_code'] == '94107']['min_dew_point_f'].min()\n\ndf_filtered = df[df['min_dew_point_f'] < min_dew_point_94107]\ndaily_counts = df_filtered.groupby(['year', 'zip_code'])['date'].count().reset_index()\ndaily_counts = daily_counts.sort_values(by=['year', 'date'], ascending=[True, True])\n\ndaily_counts['zip_code'] = daily_counts['zip_code'].astype(str)\ndaily_counts = daily_counts.groupby(['year', 'zip_code'])['date'].sum().reset_index()\n\ndaily_counts_pivot = daily_counts.pivot(index='year', columns='zip_code', values='date')\n\ndaily_counts_pivot.plot(kind='bar', ax=ax, stacked=True)\nax.set_xlabel('Year')\nax.set_ylabel('Count of Days')\nax.set_title('Count of Days with Min Dew Point Lower than 94107 Minimum')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3450,8 +3450,8 @@
       "question": "On which day has it neither been foggy nor rained in the zip code of 94107, and bin by year, count them by a bar chart, sort by the y axis in desc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3488,8 +3488,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/bike_1/weather.csv')\ndf['date'] = pd.to_datetime(df['date'])\ndf['year'] = df['date'].dt.year\ndf['no_fog_rain'] = ~df['events'].isin(['Fog', 'Rain', 'Fog-Rain', 'rain', 'Rain-Thunderstorm'])\ndf_94107 = df[df['zip_code'] == 94107]\nyearly_counts = df_94107[df_94107['no_fog_rain']].groupby('year')['date'].count()\nyearly_counts = yearly_counts.sort_values(ascending=False)\nyearly_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Count of Days with No Fog or Rain')\nax.set_title('Days with Neither Fog Nor Rain (Zip Code 94107)')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3501,7 +3501,7 @@
       "question": "How many accounts are opened in each day? Bin the account open day by weekday and group by other account details in a stacked bar chart, and rank by the y axis in ascending.",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -3597,8 +3597,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'customers_and_invoices'\ndf_name = 'accounts'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['date_account_opened'] = pd.to_datetime(df['date_account_opened'])\ndf['day_of_week'] = df['date_account_opened'].dt.day_name()\ndf['open_day'] = df['date_account_opened'].dt.date\ndaily_accounts = df.groupby(['open_day', 'other_account_details']).size().unstack()\ndaily_accounts = daily_accounts.reindex(daily_accounts.sum(axis=1).sort_values().index)\ndaily_accounts.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Account Open Day')\nax.set_ylabel('Number of Accounts')\nax.set_title('Number of Accounts Opened Each Day, Binned by Weekday and Grouped by Account Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3610,8 +3610,8 @@
       "question": "How many accounts are opened in each year? Show a group line chart that group by other account details, and could you order by the x axis in asc?",
       "hardness": "Extra Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3697,8 +3697,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/customers_and_invoices/accounts.csv')\ndf['date_account_opened'] = pd.to_datetime(df['date_account_opened'])\ndf['year'] = df['date_account_opened'].dt.year\naccount_counts = df.groupby(['year', 'other_account_details'])['account_id'].count().unstack()\naccount_counts = account_counts.reindex(sorted(account_counts.index), axis=0)\naccount_counts.plot(kind='line', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Accounts Opened')\nax.set_title('Number of Accounts Opened Each Year by Account Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3710,9 +3710,9 @@
       "question": "What are the last year of the parties whose theme is \"Spring\" or \"Teqnology\"? Count the last year for a bar chart, I want to rank y axis in desc order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
-      "evaluation": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
+      "evaluation": "nvBench was wrong",
       "fig_data": {
         "x_data": [
           [
@@ -3747,9 +3747,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'party_host'\ndf_name = 'party'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[(df['Party_Theme'] == 'Spring') | (df['Party_Theme'] == 'Teqnology')]\nlast_year_counts = df_filtered['Last_year'].value_counts().sort_values(ascending=False)\nlast_year_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Year')\nax.set_ylabel('Count')\nax.set_title('Last Year of Spring and Teqnology Parties')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3761,8 +3761,8 @@
       "question": "Draw a bar chart for how many captains with younger than 50 are in each rank?, and show Y-axis in descending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3799,8 +3799,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": false,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"ship_1\"\ndf_name = \"captain\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['age'] < 50]\nrank_counts = df_filtered['Rank'].value_counts()\nrank_counts = rank_counts.sort_values(ascending=False)\nrank_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Rank')\nax.set_ylabel('Number of Captains')\nax.set_title('Number of Captains Younger Than 50 in Each Rank')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3812,8 +3812,8 @@
       "question": "A bar chart for listing the number of the names of products that are not in any event, sort the number of product name in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3864,8 +3864,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'solvency_ii'\ndf_name = 'products'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nproduct_counts = df['Product_Name'].value_counts().sort_values()\nproduct_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Product Name')\nax.set_ylabel('Number of Products')\nax.set_title('Number of Products by Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -3877,8 +3877,8 @@
       "question": "Visualize a bar chart about the number of winery of the wines whose price is bigger than 100, and rank X in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -3963,8 +3963,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/wine_1/wine.csv')\ndf_filtered = df[df['Price'] > 100]\nwinery_counts = df_filtered['Winery'].value_counts().sort_index()\nwinery_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Winery')\nax.set_ylabel('Number of Wines')\nax.set_title('Number of Wines with Price > 100 per Winery')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -3976,8 +3976,8 @@
       "question": "Show the number of companies without a gas station in each main industry with a bar chart, could you list from low to high by the Y?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4012,8 +4012,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'gas_company'\ndf_name = 'company'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nindustry_counts = df['Main_Industry'].value_counts()\nindustry_counts = industry_counts.sort_values()\nindustry_counts.plot(kind='barh',ax=ax)\nax.set_xlabel('Number of Companies')\nax.set_ylabel('Main Industry')\nax.set_title('Number of Companies per Main Industry')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -4025,8 +4025,8 @@
       "question": "Draw a bar chart for what is average age of male for different job title?, and show Y in desc order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4059,8 +4059,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'network_2'\ndf_name = 'person'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_male = df[df['gender'] == 'male']\naverage_age_by_job = df_male.groupby('job')['age'].mean().sort_values(ascending=False)\naverage_age_by_job.plot(kind='bar', ax=ax)\nax.set_xlabel('Job Title')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Males for Different Job Titles')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -4072,8 +4072,8 @@
       "question": "Draw a bar chart for how many people are under 40 for each gender?, and rank in desc by the x-axis.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4106,8 +4106,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'network_2'\ndf_name = 'person'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_under40 = df[df['age'] < 40]\ngender_counts = df_under40.groupby('gender')['name'].count().sort_values(ascending=False)\ngender_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Gender')\nax.set_ylabel('Number of People Under 40')\nax.set_title('Number of People Under 40 by Gender')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4119,8 +4119,8 @@
       "question": "Show all ministers who do not belong to Progress Party, and count them by a bar chart, and order in asc by the Y.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4157,8 +4157,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/party_people/party.csv')\ndf_filtered = df[df['Party_name'] != 'Progress Party']\nminister_counts = df_filtered['Minister'].value_counts().sort_values()\nminister_counts.plot(kind='barh', ax=ax)\nax.set_xlabel('Count')\nax.set_ylabel('Minister')\nax.set_title('Ministers Not Belonging to Progress Party')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -4170,8 +4170,8 @@
       "question": "For all employees who have the letters D or S in their first name, return a bar chart about the distribution of hire_date and the average of salary bin hire_date by weekday, and display from low to high by the y axis.",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4220,8 +4220,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = \"hr_1\"\ndf_name = \"employees\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\ndf['weekday'] = df['HIRE_DATE'].dt.day_name()\ndf['year'] = df['HIRE_DATE'].dt.year\n\ndf_filtered = df[df['FIRST_NAME'].str.contains('[DS]')].copy()\n\nsalary_by_weekday = df_filtered.groupby(['weekday', 'year'])['SALARY'].mean().unstack()\nsalary_by_weekday = salary_by_weekday.reindex(sorted(salary_by_weekday.columns), axis=1)\n\nsalary_by_weekday.plot(kind='bar', stacked=True, ax=ax)\n\nax.set_xlabel('Weekday')\nax.set_ylabel('Average Salary')\nax.set_title('Average Salary by Hire Date Weekday for Employees with D or S in First Name')\nfig.suptitle('')\nplt.xticks(rotation=0)\nplt.tight_layout()\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4233,7 +4233,7 @@
       "question": "For all employees in the same department as Clara excluding Clara, bin their hire date into the month interval, and count how many employees in each month for a bar chart, rank from low to high by the Y.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": true,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
@@ -4254,8 +4254,8 @@
       "binning": "MONTH",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\nclara_department = df[df['FIRST_NAME'] == 'Clara']['DEPARTMENT_ID'].iloc[0]\ndf_clara_department = df[(df['DEPARTMENT_ID'] == clara_department) & (df['FIRST_NAME'] != 'Clara')]\ndf_clara_department['HIRE_DATE'] = pd.to_datetime(df_clara_department['HIRE_DATE'])\ndf_clara_department['HIRE_MONTH'] = df_clara_department['HIRE_DATE'].dt.to_period('M')\nhire_month_counts = df_clara_department['HIRE_MONTH'].value_counts().sort_values()\n\nfig, ax = plt.subplots(1, 1, figsize=(10, 4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nsns.barplot(x=hire_month_counts.index.astype(str), y=hire_month_counts.values, ax=ax)\nax.set_xlabel('Hire Month')\nax.set_ylabel('Number of Employees')\nax.set_title('Employee Hire Month Distribution (excluding Clara)')\nfig.suptitle('')\nplt.xticks(rotation=45, ha='right')\nplt.tight_layout()\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -4267,8 +4267,8 @@
       "question": "Group and count the job id for all employees whose salary is smaller than any salary of those employees whose job title is MK_MAN for visualizing a bar chart, and rank by the names in desc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4357,8 +4357,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nmk_man_salaries = df[df['JOB_ID'] == 'MK_MAN']['SALARY']\nemployees_lower_salary = df[df['SALARY'] < mk_man_salaries.min()]\njob_id_counts = employees_lower_salary['JOB_ID'].value_counts().sort_index(ascending=False)\njob_id_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Job ID')\nax.set_ylabel('Number of Employees')\nax.set_title('Number of Employees with Salary Less Than Minimum MK_MAN Salary')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4370,8 +4370,8 @@
       "question": "Compute the number of each type of job ids for employees who make more than the highest-earning employee with title PU_MAN, with a bar chart, and show by the the number of job id in desc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4424,8 +4424,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\npu_man_max_salary = df[df['JOB_ID'] == 'PU_MAN']['SALARY'].max()\nhigh_earners = df[df['SALARY'] > pu_man_max_salary]\njob_id_counts = high_earners['JOB_ID'].value_counts().sort_values(ascending=False)\njob_id_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Job ID')\nax.set_ylabel('Number of Employees')\nax.set_title('Number of Employees with Salary > Max PU_MAN Salary by Job ID')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4437,8 +4437,8 @@
       "question": "For those employees whose first name is ending with the letter m, show the frequency of the first name using a bar chart, list by the y-axis in desc.",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4475,8 +4475,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"hr_1\"\ndf_name = \"employees\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_m = df[df['FIRST_NAME'].str.endswith('m')]\nname_counts = df_m['FIRST_NAME'].value_counts()\nname_counts.plot(kind='barh', ax=ax)\nax.set_xlabel('Frequency')\nax.set_ylabel('First Name')\nax.set_title('Frequency of First Names Ending in \"m\"')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -4488,8 +4488,8 @@
       "question": "For those employees whose first name does not contain the letter M, give me a line chart to show the hire date and the corresponding salaries, show in asc by the x-axis please.",
       "hardness": "Hard",
       "chart": "Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -4680,9 +4680,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'hr_1'\ndf_name = 'employees'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['HIRE_DATE'] = pd.to_datetime(df['HIRE_DATE'])\ndf_filtered = df[~df['FIRST_NAME'].str.contains('M')]\ndf_filtered = df_filtered.sort_values(by='HIRE_DATE')\nax.plot(df_filtered['HIRE_DATE'],df_filtered['SALARY'])\nax.set_xlabel('Hire Date')\nax.set_ylabel('Salary')\nax.set_title('Salary vs. Hire Date (Employees without \"M\" in First Name)')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4694,8 +4694,8 @@
       "question": "Return a bar chart showing the number of templates with a version number greater than 5 for each template type code, and order y-axis in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4740,8 +4740,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'cre_Doc_Template_Mgt'\ndf_name = 'templates'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['Version_Number'] > 5]\ntemplate_counts = df_filtered.groupby('Template_Type_Code')['Template_ID'].count()\ntemplate_counts = template_counts.reindex(['PP', 'BK', 'PPT', 'AD', 'CV'])\ntemplate_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Template Type Code')\nax.set_ylabel('Number of Templates (Version > 5)')\nax.set_title('Number of Templates with Version Number > 5 per Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4753,8 +4753,8 @@
       "question": "How many rooms in each building have a capacity of over 50 Visualize by bar chart, list by the X in ascending.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4819,8 +4819,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'college_2'\ndf_name = 'classroom'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['capacity'] > 50]\nbuilding_counts = df_filtered.groupby('building')['room_number'].count().sort_index()\nbuilding_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Building')\nax.set_ylabel('Number of Rooms (Capacity > 50)')\nax.set_title('Number of Rooms with Capacity Over 50 per Building')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -4832,8 +4832,8 @@
       "question": "How many courses are provided in each year? Visualize with a group line chart grouping by semester, could you list x axis in asc order?",
       "hardness": "Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -4921,9 +4921,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/college_2/section.csv')\ndf = df.sort_values(by=['year'])\ncourse_counts = df.groupby(['year','semester'])['course_id'].count().unstack()\ncourse_counts.plot(kind='line',ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Courses')\nax.set_title('Number of Courses Offered Each Year')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -4935,8 +4935,8 @@
       "question": "Find the number of courses provided in each year with a group line chart that groups by semester, list the binning year in asc order.",
       "hardness": "Extra Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5025,8 +5025,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/college_2/section.csv')\ndf_grouped = df.groupby(['year','semester'])['course_id'].count().unstack()\ndf_grouped.plot(kind='line',ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Courses')\nax.set_title('Number of Courses Offered Each Year by Semester')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5038,8 +5038,8 @@
       "question": "How many departments whose budget is more than the average budget in each building? Show me a bar chart, list by the total number in asc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -5075,8 +5075,8 @@
       "binning": "",
       "check_run": "Error: name 'avg_budget' is not defined",
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'college_2'\ndf_name = 'department'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\navg_budget = df.groupby('building')['budget'].mean()\ndf['above_avg'] = df.apply(lambda row: row['budget'] > avg_budget[row['building']], axis=1)\nbuilding_counts = df.groupby('building')['above_avg'].sum().sort_values()\nbuilding_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Building')\nax.set_ylabel('Number of Departments Above Average Budget')\nax.set_title('Number of Departments with Budget Above Average per Building')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5088,8 +5088,8 @@
       "question": "A bar chart about the number of countries for all people whose age is smaller than the average, and could you display in desc by the X-axis?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5122,8 +5122,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = 'wedding'\ndf_name = 'people'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\navg_age = df['Age'].mean()\ndf_filtered = df[df['Age'] < avg_age]\ncountry_counts = df_filtered['Country'].value_counts()\ncountry_counts = country_counts.sort_index(ascending=False)\n\ncountry_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of People')\nax.set_title('Number of Countries for People Younger than Average Age')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5135,8 +5135,8 @@
       "question": "Find the name and account balance of the customer whose name includes the letter 'a' Visualize them using a bar chart, show y-axis in descending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5193,8 +5193,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'loan_1'\ndf_name = 'customer'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['cust_name'].str.contains('a')]\ndf_filtered = df_filtered.sort_values('acc_bal',ascending=False)\ndf_filtered.plot(x='cust_name',y='acc_bal',kind='bar',ax=ax)\nax.set_xlabel('Customer Name')\nax.set_ylabel('Account Balance')\nax.set_title('Customer Account Balance')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5206,8 +5206,8 @@
       "question": "Stack bar chart of the number of headquarters vs Industry based on headquarters, display Y-axis in desc order please.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5344,8 +5344,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'company_employee'\ndf_name = 'company'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nheadquarters_industry = df.groupby(['Headquarters', 'Industry']).size().unstack()\nheadquarters_industry = headquarters_industry.sort_values(by='Banking', ascending=False)\nheadquarters_industry.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Headquarters')\nax.set_ylabel('Number of Companies')\nax.set_title('Number of Headquarters vs Industry')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5357,8 +5357,8 @@
       "question": "What is the name of the technician whose team is not 'NYY', and count them by a bar chart, show by the total number from high to low.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5411,8 +5411,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"machine_repair\"\ndf_name = \"technician\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['Team'] != 'NYY']\nname_counts = df_filtered['Name'].value_counts()\nname_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Technician Name')\nax.set_ylabel('Count')\nax.set_title('Number of Technicians (excluding NYY team)')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -5424,7 +5424,7 @@
       "question": "Show the number of documents in different ending date Bin ending date by weekday and group by location code with a stacked bar chart, could you display in descending by the y axis please?",
       "hardness": "Extra Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
@@ -5793,8 +5793,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndatabase_name = 'cre_Doc_Tracking_DB'\ndf_name = 'document_locations'\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['Date_in_Locaton_To'] = pd.to_datetime(df['Date_in_Locaton_To'])\ndf['weekday'] = df['Date_in_Locaton_To'].dt.dayofweek\ndf['ending_date_bin'] = pd.cut(df['Date_in_Locaton_To'], bins=10)\ndf_grouped = df.groupby(['Location_Code', 'weekday', 'ending_date_bin']).size().unstack()\ndf_grouped = df_grouped.sort_values(by=df_grouped.columns[-1],ascending=False)\ndf_grouped.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Weekday and Ending Date Bin')\nax.set_ylabel('Number of Documents')\nax.set_title('Number of Documents in Different Ending Date Bins by Weekday and Location Code')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5806,8 +5806,8 @@
       "question": "Show the number of products with price higher than 1000 or lower than 500 for each product type code in a bar chart, I want to order by the total number in asc please.",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -5827,8 +5827,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\ndf['price_range'] = df['product_price'].apply(lambda x: 'High' if x > 1000 else 'Low' if x < 500 else 'Medium')\nprice_range_counts = df[df['price_range'].isin(['High', 'Low'])].groupby(['product_type_code', 'price_range']).size().unstack()\nprice_range_counts['Total'] = price_range_counts['High'] + price_range_counts['Low']\nprice_range_counts = price_range_counts.sort_values(by='Total')\nprice_range_counts[['High', 'Low']].plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Product Type Code')\nax.set_ylabel('Number of Products')\nax.set_title('Number of Products with Price > 1000 or < 500 per Product Type')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -5840,8 +5840,8 @@
       "question": "Show the number of products with price higher than 1000 or lower than 500 for each product name in a bar chart, and could you rank y-axis in descending order?",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -5865,8 +5865,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/customers_and_products_contacts/products.csv')\ndf['price_range'] = df['product_price'].apply(lambda x: 'High' if x > 1000 else 'Low' if x < 500 else 'Medium')\nprice_range_counts = df[df['price_range'].isin(['High', 'Low'])].groupby(['product_name', 'price_range']).size().unstack()\nprice_range_counts = price_range_counts.fillna(0)\nprice_range_counts['Total'] = price_range_counts['High'] + price_range_counts['Low']\nprice_range_counts = price_range_counts.sort_values(by='Total', ascending=False)\nprice_range_counts[['High', 'Low']].plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Product Name')\nax.set_ylabel('Number of Products')\nax.set_title('Number of Products with Price > 1000 or < 500')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -5878,8 +5878,8 @@
       "question": "When are the birthdays of customer who are classified as 'Good Customer' status, bin birthday by weekday and count them by a bar chart, could you order y-axis in ascending order?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5932,8 +5932,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/driving_school/customers.csv')\ndf['date_of_birth'] = pd.to_datetime(df['date_of_birth'])\ndf['weekday'] = df['date_of_birth'].dt.day_name()\ngood_customers = df[df['customer_status_code'] == 'Good Customer']\nweekday_counts = good_customers['weekday'].value_counts()\nweekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']\nweekday_counts = weekday_counts.reindex(weekday_order)\nweekday_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Weekday')\nax.set_ylabel('Number of Good Customers')\nax.set_title('Birthdays of Good Customers by Weekday')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -5945,8 +5945,8 @@
       "question": "What are the countries of all airlines whose names start with Orbit, and count them by a bar chart, order total number from low to high order.",
       "hardness": "Extra Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -5983,8 +5983,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'flight_4'\ndf_name = 'airlines'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\norbit_airlines = df[df['name'].str.startswith('Orbit')]\ncountry_counts = orbit_airlines['country'].value_counts().sort_values()\ncountry_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of Airlines')\nax.set_title('Countries of Airlines Starting with \"Orbit\"')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -5996,8 +5996,8 @@
       "question": "Show the average age for all female students and group them by first name in a bar chart, and could you rank the average of age in asc order?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6054,8 +6054,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'allergy_1'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nfemale_students = df[df['Sex'] == 'F']\naverage_age_by_name = female_students.groupby('Fname')['Age'].mean().sort_values()\naverage_age_by_name.plot(kind='bar', ax=ax)\nax.set_xlabel('First Name')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Female Students by First Name')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -6067,8 +6067,8 @@
       "question": "A bar chart about the number of last name for all female students whose sex is F, and rank in asc by the y-axis.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -6102,8 +6102,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/allergy_1/student.csv')\nfemale_students = df[df['Sex'] == 'F']\nlname_counts = female_students['LName'].value_counts().sort_values()\nsns.barplot(x=lname_counts.values, y=lname_counts.index, ax=ax)\nax.set_xlabel('Number of Students')\nax.set_ylabel('Last Name')\nax.set_title('Number of Female Students per Last Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6115,8 +6115,8 @@
       "question": "Show the average age for all female students and group them by last name with a bar chart, and could you order the average of age in desc order?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6177,8 +6177,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'allergy_1'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nfemale_students = df[df['Sex'] == 'F']\naverage_age_by_lname = female_students.groupby('LName')['Age'].mean().sort_values(ascending=False)\naverage_age_by_lname.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Female Students by Last Name')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -6190,8 +6190,8 @@
       "question": "For all the claims whose claimed amount is larger than the average, bin the claim date into day of week interval and count them for visualizing a bar chart, order from high to low by the y axis.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": false,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6234,8 +6234,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"insurance_policies\"\ndf_name = \"claims\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['Date_Claim_Made'] = pd.to_datetime(df['Date_Claim_Made'])\navg_claimed = df['Amount_Claimed'].mean()\ndf_filtered = df[df['Amount_Claimed'] > avg_claimed]\ndf_filtered['day_of_week'] = df_filtered['Date_Claim_Made'].dt.dayofweek\nday_counts = df_filtered.groupby('day_of_week')['Claim_ID'].count().sort_values(ascending=False)\nday_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of Week')\nax.set_ylabel('Number of Claims')\nax.set_title('Claims Above Average Amount by Day of Week')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6247,8 +6247,8 @@
       "question": "For those payments processed with Visa, bin the payment day into Year interval and count them for a bar chart, order from high to low by the y axis.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6281,8 +6281,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/insurance_policies/payments.csv')\n\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\ndf['Year'] = df['Date_Payment_Made'].dt.year\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\nyearly_counts = visa_payments.groupby('Year')['Payment_ID'].count()\nyearly_counts = yearly_counts.sort_values(ascending=False)\nyearly_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Visa Payments')\nax.set_title('Number of Visa Payments per Year')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6294,8 +6294,8 @@
       "question": "Calculate the average of amount for all the payments processed with Visa by each year using a bar chart, and could you order y axis in desc order?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6328,8 +6328,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndatabase_name = 'insurance_policies'\ndf_name = 'payments'\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\ndf['Year'] = df['Date_Payment_Made'].dt.year\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\naverage_amount_by_year = visa_payments.groupby('Year')['Amount_Payment'].mean()\naverage_amount_by_year = average_amount_by_year.sort_values(ascending=False)\naverage_amount_by_year.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Average Amount')\nax.set_title('Average Amount of Visa Payments by Year')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6341,8 +6341,8 @@
       "question": "For those payments processed with Visa, show me the number of payments of each day of the week using a bar chart, and sort total number in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6387,8 +6387,8 @@
       "binning": "WEEKDAY",
       "check_run": true,
       "check_dates": true,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  false,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndatabase_name = 'insurance_policies'\ndf_name = 'payments'\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['Date_Payment_Made'] = pd.to_datetime(df['Date_Payment_Made'])\ndf['Day_of_Week'] = df['Date_Payment_Made'].dt.day_name()\nvisa_payments = df[df['Payment_Method_Code'] == 'Visa']\ndaily_counts = visa_payments.groupby('Day_of_Week')['Payment_ID'].count().sort_values()\ndaily_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Day of the Week')\nax.set_ylabel('Number of Visa Payments')\nax.set_title('Number of Visa Payments by Day of the Week')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6400,8 +6400,8 @@
       "question": "What are the countries of mountains with height bigger than 5000, and count them by a bar chart, and I want to list y-axis in asc order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6438,8 +6438,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'climbing'\ndf_name = 'mountain'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nhigh_mountains = df[df['Height'] > 5000]\ncountry_counts = high_mountains['Country'].value_counts()\ncountry_counts = country_counts.sort_values()\ncountry_counts.plot(kind='barh', ax=ax)\nax.set_xlabel('Count')\nax.set_ylabel('Country')\nax.set_title('Countries of Mountains Higher Than 5000m')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -6451,8 +6451,8 @@
       "question": "What are the category of music festivals with evaluation \"Awarded\", and count them by a bar chart, I want to list x axis in asc order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6485,8 +6485,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"music_4\"\ndf_name = \"music_festival\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nawarded_df = df[df['Result'] == 'Awarded']\ncategory_counts = awarded_df['Category'].value_counts().sort_index()\ncategory_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Category')\nax.set_ylabel('Count')\nax.set_title('Category of Music Festivals with Awarded Result')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -6498,8 +6498,8 @@
       "question": "Compute the total number in each competition type, and then split by country. Plot a bar chart and show in desc by the x-axis.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6564,8 +6564,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'sports_competition'\ndf_name = 'competition'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nct = pd.crosstab(df['Country'],df['Competition_type'])\nct = ct.sort_values(by=['Friendly','Tournament'],ascending=False)\nct.plot(kind='bar',stacked=True,ax=ax)\nax.set_xlabel('Country')\nax.set_ylabel('Number of Competitions')\nax.set_title('Total Number of Competitions by Type and Country')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -6577,8 +6577,8 @@
       "question": "How many faculty members do we have for each rank and gender? Plot them as bar chart, I want to sort y axis in asc order.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6631,8 +6631,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/activity_1/faculty.csv')\nrank_gender = df.groupby(['Rank', 'Sex']).size().unstack()\nrank_gender = rank_gender.reindex(['Instructor','AsstProf','AssocProf','Professor'])\nrank_gender.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Rank')\nax.set_ylabel('Number of Faculty Members')\nax.set_title('Number of Faculty Members per Rank and Gender')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6644,8 +6644,8 @@
       "question": "Show the number of male and female assistant professors with a bar chart, list y axis in ascending order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6678,8 +6678,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/activity_1/faculty.csv')\ndf_asstprof = df[df['Rank'] == 'AsstProf']\nsex_counts = df_asstprof['Sex'].value_counts().sort_index()\nsex_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Sex')\nax.set_ylabel('Number of Assistant Professors')\nax.set_title('Number of Male and Female Assistant Professors')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6691,7 +6691,7 @@
       "question": "Draw a line chart about the change of the amount of Start_from over Start_from , and group by attribute Is_full_time and bin start_from by year, rank x axis in asc order.",
       "hardness": "Extra Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
+      "isDataCorrect": false,
       "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
@@ -6743,8 +6743,8 @@
       "binning": "YEAR",
       "check_run": true,
       "check_dates": false,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'employee_hire_evaluation'\ndf_name = 'hiring'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf['Start_from'] = pd.to_datetime(df['Start_from'], unit='s')\ndf['Year'] = df['Start_from'].dt.year\ndf_grouped = df.groupby(['Year', 'Is_full_time'])['Start_from'].count().unstack()\ndf_grouped.plot(kind='line', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Employees')\nax.set_title('Change in Number of Employees Hired Over Time, Grouped by Employment Type')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6756,8 +6756,8 @@
       "question": "Find the number of professors with a PhD degree in each department Show bar chart, and I want to sort x-axis in desc order.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6826,8 +6826,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/college_1/professor.csv')\n\nphd_by_dept = df[df['PROF_HIGH_DEGREE'] == 'Ph.D.'].groupby('DEPT_CODE')['EMP_NUM'].count().sort_values(ascending=False)\n\nphd_by_dept.plot(kind='bar', ax=ax)\nax.set_xlabel('Department Code')\nax.set_ylabel('Number of Professors with PhD')\nax.set_title('Number of Professors with PhD Degree in Each Department')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -6839,8 +6839,8 @@
       "question": "Find the number of students who are not in the largest major and group by students' first name in a bar chart, and rank from high to low by the y axis.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -6913,8 +6913,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'dorm_1'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nlargest_major = df['Major'].value_counts().index[0]\ndf_filtered = df[df['Major'] != largest_major]\nstudent_counts = df_filtered.groupby('Fname')['StuID'].count().sort_values(ascending=False)\nstudent_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Student First Name')\nax.set_ylabel('Number of Students')\nax.set_title('Number of Students Not in the Largest Major, Grouped by First Name')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -6926,8 +6926,8 @@
       "question": "What is the average age of male students in each city? Draw a bar chart, show by the names in descending.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -6979,8 +6979,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'dorm_1'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nmale_students = df[df['Sex'] == 'M']\naverage_age_by_city = male_students.groupby('city_code')['Age'].mean().sort_values(ascending=False)\nsns.barplot(x=average_age_by_city.index, y=average_age_by_city.values, ax=ax)\nax.set_xlabel('City Code')\nax.set_ylabel('Average Age')\nax.set_title('Average Age of Male Students by City')\nfig.suptitle('')\n\nplt.show()\n",
       "addRule": null,
       "addExample": null
@@ -6992,8 +6992,8 @@
       "question": "Find the number of students whose age is younger than the average age and group by students' first name in a bar chart, could you show in descending by the y axis?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7082,8 +7082,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/dorm_1/student.csv')\naverage_age = df['Age'].mean()\nyounger_students = df[df['Age'] < average_age]\nstudent_counts = younger_students.groupby('Fname')['StuID'].count().sort_values(ascending=False)\nstudent_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Student First Name')\nax.set_ylabel('Number of Students Younger Than Average Age')\nax.set_title('Number of Students Younger Than Average Age by First Name')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7095,8 +7095,8 @@
       "question": "Find the number of students whose age is younger than the average age and group by students' last name in a bar chart, and sort by the Y-axis in descending.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7189,8 +7189,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'dorm_1'\ndf_name = 'student'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\navg_age = df['Age'].mean()\ndf_young = df[df['Age'] < avg_age]\ncounts = df_young.groupby('LName')['StuID'].count()\ncounts = counts.sort_values(ascending=False)\ncounts.plot(kind='bar', ax=ax)\nax.set_xlabel('Last Name')\nax.set_ylabel('Number of Students Younger than Average Age')\nax.set_title('Number of Students Younger than Average Age by Last Name')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -7202,8 +7202,8 @@
       "question": "A bar chart about the number of end dates for incidents with incident type code \"NOISE\" and bin by month, could you show by the y-axis from high to low please?",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7236,8 +7236,8 @@
       "binning": "MONTH",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/behavior_monitoring/behavior_incident.csv')\ndf['date_incident_end'] = pd.to_datetime(df['date_incident_end'])\ndf['month'] = df['date_incident_end'].dt.month\nnoise_incidents = df[df['incident_type_code'] == 'NOISE']\nmonthly_counts = noise_incidents.groupby('month')['date_incident_end'].count()\nmonthly_counts = monthly_counts.sort_values(ascending=False)\nmonthly_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Month')\nax.set_ylabel('Number of Incidents')\nax.set_title('Number of Incidents Ending Each Month (Noise)')\nfig.suptitle('')\n\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7249,8 +7249,8 @@
       "question": "For each continent where the average life expectancy is shorter than 72, show their total population with a bar chart, display in asc by the sum population.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7291,8 +7291,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'world_1'\ndf_name = 'country'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ncontinents_low_life_expectancy = df.groupby('Continent')['LifeExpectancy'].mean()[df.groupby('Continent')['LifeExpectancy'].mean() < 72].index\ndf_filtered = df[df['Continent'].isin(continents_low_life_expectancy)]\ncontinent_population = df_filtered.groupby('Continent')['Population'].sum()\ncontinent_population = continent_population.sort_values()\ncontinent_population.plot(kind='bar', ax=ax)\nax.set_xlabel('Continent')\nax.set_ylabel('Total Population')\nax.set_title('Total Population of Continents with Average Life Expectancy < 72')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7304,8 +7304,8 @@
       "question": "Find those years for all exhibitions with ticket prices lower than 15, return a bar chart that groups by year and counts the total number of years, and I want to display in ascending by the total number.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7342,8 +7342,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'theme_gallery'\ndf_name = 'exhibition'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf_filtered = df[df['Ticket_Price'] < 15]\nyearly_counts = df_filtered.groupby('Year')['Exhibition_ID'].count().sort_values()\nyearly_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Number of Exhibitions')\nax.set_title('Number of Exhibitions with Ticket Price < 15 per Year')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7355,8 +7355,8 @@
       "question": "Find the number of rooms with price higher than 120 for different decor Show bar chart, and list by the Y in descending.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7393,8 +7393,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'inn_1'\ndf_name = 'rooms'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nprice_filter = df['basePrice'] > 120\nfiltered_df = df[price_filter]\ndecor_counts = filtered_df.groupby('decor')['RoomId'].count().sort_values(ascending=False)\ndecor_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Decor')\nax.set_ylabel('Number of Rooms (Price > 120)')\nax.set_title('Number of Rooms with Price Higher Than 120 by Decor')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7406,8 +7406,8 @@
       "question": "Show me a stacked bar graph, the x-axis is the nationality of ship, and the y-axis is their total number of different nationality and split by ship type, and show X-axis in desc order.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": false,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7448,8 +7448,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndf = pd.read_csv('./visEval_dataset/databases/ship_mission/ship.csv')\ndf_nationality_type = df.groupby(['Nationality', 'Type'])['Ship_ID'].count().unstack()\ndf_nationality_type = df_nationality_type.reindex(df_nationality_type.sum(axis=1).sort_values(ascending=False).index)\ndf_nationality_type.plot(kind='bar', stacked=True, ax=ax)\nax.set_xlabel('Nationality')\nax.set_ylabel('Number of Ships')\nax.set_title('Number of Ships by Nationality and Type')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -7461,8 +7461,8 @@
       "question": "Stack bar chart of the number of type vs Nationality based on type, and list x-axis in descending order.",
       "hardness": "Hard",
       "chart": "Stacked Bar",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7503,8 +7503,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'ship_mission'\ndf_name = 'ship'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\nct = pd.crosstab(df['Type'],df['Nationality'])\nct = ct.sort_values(by='United Kingdom',ascending=False)\nct.plot(kind='bar',stacked=True,ax=ax)\nax.set_xlabel('Type')\nax.set_ylabel('Number of Ships')\nax.set_title('Number of Ships by Type and Nationality')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
@@ -7516,8 +7516,8 @@
       "question": "Show the relationship between the number of staff and the score of the shop. Scatter plot is preferred.",
       "hardness": "Extra Hard",
       "chart": "Scatter",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7618,8 +7618,8 @@
       "binning": "",
       "check_run": true,
       "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = \"coffee_shop\"\ndf_name = \"shop\"\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\ndf.plot(x='Num_of_staff', y='Score', kind='scatter', ax=ax)\nax.set_xlabel('Number of Staff')\nax.set_ylabel('Score')\nax.set_title('Relationship between Number of Staff and Shop Score')\nfig.suptitle('')\nplt.show()\n\n",
       "addRule": null,
       "addExample": null
@@ -7631,8 +7631,8 @@
       "question": "From 1973 to 1979, show the maximum acceleration of cars with 4, 6, and 8 cylinders each year. Line chart.",
       "hardness": "Hard",
       "chart": "Grouping Line",
-      "isDataCorrect": null,
-      "isStyleCorrect": null,
+      "isDataCorrect": true,
+      "isStyleCorrect": true,
       "evaluation": null,
       "fig_data": {
         "x_data": [
@@ -7720,9 +7720,9 @@
       },
       "binning": "",
       "check_run": true,
-      "check_dates": null,
-      "check_overflow": "",
-      "check_overlap": "",
+      "check_dates": true,
+      "check_overflow": true,
+      "check_overlap":  true,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\n\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n\ndatabase_name = 'car_1'\ndf_name = 'cars_data'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\n\ndf_filtered = df[(df['Year'] >= 1973) & (df['Year'] <= 1979) & (df['Cylinders'].isin([4, 6, 8]))]\ndf_pivot = df_filtered.pivot_table(index='Year', columns='Cylinders', values='Accelerate', aggfunc='max')\n\ndf_pivot.plot(kind='line', ax=ax)\nax.set_xlabel('Year')\nax.set_ylabel('Maximum Acceleration')\nax.set_title('Maximum Acceleration of Cars (1973-1979)')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
