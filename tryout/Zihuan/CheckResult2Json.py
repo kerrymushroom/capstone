@@ -1,8 +1,36 @@
+import os
+import json
+from PIL import Image
 from imutils.object_detection import non_max_suppression
 import numpy as np
 import cv2
 
-def checkOverlap(image, east_model_path, min_confidence, min_overlap_ratio):
+# Check if the chart content extends beyond the canvas boundaries.
+def checkOverflow(image_path):
+    # Load the saved image
+    img = Image.open(image_path)
+    # Convert to grayscale image (L mode)
+    img_array = np.array(img.convert("L"))
+    # Get image dimensions
+    height, width = img_array.shape
+
+    # Set the threshold for background color (assuming white background with a value of 255)
+    background_color = 255
+    threshold = 250  # Define a threshold; pixels below this value are considered chart content
+
+    # Check the four boundaries (top, bottom, left, right)
+    if np.any(img_array[0, :] < threshold):  # Check top boundary
+        return True
+    if np.any(img_array[-1, :] < threshold):  # Check bottom boundary
+        return True
+    if np.any(img_array[:, 0] < threshold):  # Check left boundary
+        return True
+    if np.any(img_array[:, -1] < threshold):  # Check right boundary
+        return True
+    return False
+
+def checkOverlap(image_path, east_model_path, min_confidence, min_overlap_ratio):
+    image = cv2.imread(image_path)
     width, height = 320, 320
     # Copy the original image and get image dimensions
     orig = image.copy()
@@ -24,7 +52,7 @@ def checkOverlap(image, east_model_path, min_confidence, min_overlap_ratio):
     ]
 
     # Load the pre-trained EAST model
-    print("[INFO] loading EAST text detector...")
+    # print("[INFO] loading EAST text detector...")
     net = cv2.dnn.readNet(east_model_path)
 
     # Construct a blob and perform a forward pass to get scores and geometry data
@@ -96,33 +124,45 @@ def checkOverlap(image, east_model_path, min_confidence, min_overlap_ratio):
         if overlap_detected:
             break
 
-    if overlap_detected:
-        print("There is an overlap in text regions in the image")
-    else:
-        print("There is no overlap in text regions in the image")
-
-    # Draw bounding boxes on the original image
-    for (startX, startY, endX, endY) in boxes:
-        startX = int(startX * rW)
-        startY = int(startY * rH)
-        endX = int(endX * rW)
-        endY = int(endY * rH)
-        cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
-
     # Display output image
-    cv2.imshow("Text Detection", orig)
-    cv2.waitKey(0)
     return overlap_detected
 
-# Set image path and EAST model path
-# image_path = "/Users/subring/capstone/tryout/Zihuan/image_3236_overlap.png"
-# image_path = "/Users/subring/capstone/tryout/Zihuan/image/image_1556_overlap.png"
-image_path = "/Users/subring/capstone/findRule/saved_data/1215@y_name@DESC/1215@y_name@DESC_gpt.png"
+# Define the image folder path
+base_dir = '/Users/subring/capstone/findRule/saved_data'
+# json_file_path = "/Users/subring/capstone/tryout/Zihuan/GPTOutput.json"
+json_file_path = "/Users/subring/capstone/findRule/gptOutputAdded.json"
 east_model_path = "/Users/subring/capstone/tryout/Zihuan/frozen_east_text_detection.pb"
 
-# Load the image
-image = cv2.imread(image_path)
+# Read the existing JSON file
+with open(json_file_path, "r") as f:
+    data = json.load(f)
 
-# Call the function
-overlap = checkOverlap(image, east_model_path, 0.5, 0.3)
-print("Overlap detected:", overlap)
+# Traverse all subfolders and files
+for root, dirs, files in os.walk(base_dir):
+    for file in files:
+        # Check if the file name ends with "_gpt.png"
+        if file.lower().endswith('_gpt.png'):
+            # Get the full file path
+            image_path = os.path.join(root, file)
+            # Get the folder name
+            folder_name = os.path.basename(root)
+            check_overflow = True
+            check_overlap = True
+            # if checkOverflow(image_path):
+            #     check_overflow = "true"
+            #     print(f"{folder_name} is overflowed")
+            # if checkOverlap(image_path, east_model_path, 0.5, 0.3):
+            #     check_overlap = "true"
+            #     print(f"{folder_name} is overlapped")
+            # Add image path to "0" under "189"
+            if folder_name in data and "0" in data[folder_name]:
+                data[folder_name]["0"]["check_overflow"] = True
+                data[folder_name]["0"]["check_overlap"] = True
+            else:
+                print(f"Unable to find the key {folder_name} or '0'. Please check the JSON format!")
+
+# Write the modified data back to the JSON file
+with open(json_file_path, "w") as f:
+    json.dump(data, f, indent=4)
+
+print("Successfully updated the JSON file")
