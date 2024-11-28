@@ -739,7 +739,7 @@
         ]
       },
       "binning": "WEEKDAY",
-      "check_run": "Error: name 'calendar' is not defined",
+      "check_run": true,
       "check_dates": false,
       "check_overflow": true,
       "check_overlap":  true,
@@ -1177,8 +1177,8 @@
       "question": "Show the number of products with price higher than 1000 or lower than 500 for each product type code in a pie chart.",
       "hardness": "Hard",
       "chart": "Pie",
-      "isDataCorrect": false,
-      "isStyleCorrect": false,
+      "isDataCorrect": null,
+      "isStyleCorrect": null,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -5038,8 +5038,8 @@
       "question": "How many departments whose budget is more than the average budget in each building? Show me a bar chart, list by the total number in asc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": false,
-      "isStyleCorrect": false,
+      "isDataCorrect": null,
+      "isStyleCorrect": null,
       "evaluation": null,
       "fig_data": null,
       "nv_data": {
@@ -5075,8 +5075,8 @@
       "binning": "",
       "check_run": "Error: name 'avg_budget' is not defined",
       "check_dates": null,
-      "check_overflow": true,
-      "check_overlap":  true,
+      "check_overflow": null,
+      "check_overlap":  null,
       "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfig,ax = plt.subplots(1,1,figsize=(10,4))\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \ndatabase_name = 'college_2'\ndf_name = 'department'\ndf = pd.read_csv('./visEval_dataset/databases/' + database_name + '/' + df_name + '.csv')\navg_budget = df.groupby('building')['budget'].mean()\ndf['above_avg'] = df.apply(lambda row: row['budget'] > avg_budget[row['building']], axis=1)\nbuilding_counts = df.groupby('building')['above_avg'].sum().sort_values()\nbuilding_counts.plot(kind='bar', ax=ax)\nax.set_xlabel('Building')\nax.set_ylabel('Number of Departments Above Average Budget')\nax.set_title('Number of Departments with Budget Above Average per Building')\nfig.suptitle('')\nplt.show()",
       "addRule": null,
       "addExample": null
