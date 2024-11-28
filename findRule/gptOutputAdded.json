@@ -4382,7 +4382,7 @@
       "question": "Compute the number of each type of job ids for employees who make more than the highest-earning employee with title PU_MAN, with a bar chart, and show by the the number of job id in desc.",
       "hardness": "Hard",
       "chart": "Bar",
-      "isDataCorrect": null,
+      "isDataCorrect": true,
       "isStyleCorrect": false,
       "evaluation": "Rotated x-axis",
       "fig_data": {
