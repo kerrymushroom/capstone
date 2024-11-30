@@ -1,0 +1,15 @@
+==========================
+1.API keys website:
+https://platform.openai.com/settings/profile?tab=api-keys
+
+==========================
+2.OpenAI Python Github
+https://github.com/openai/openai-python
+
+==========================
+3.OpenAI developer platform
+https://platform.openai.com/docs/overview
+
+==========================
+4.OpenAI Pricing
+https://openai.com/api/pricing/

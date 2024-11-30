@@ -1,0 +1,7 @@
+==========================
+1.Quick Install
+pip3 install yolopandas
+==========================
+2.Yolopandas Github
+https://github.com/ccurme/yolopandas/blob/main/README.md
+==========================

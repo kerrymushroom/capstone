@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Chat2VIS_Streamlit"
+		},
+		{
+			"path": "../code"
+		}
+	],
+	"settings": {}
+}

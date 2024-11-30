@@ -1,0 +1,27 @@
+chart_type,hardness,False,True
+Bar,Easy,325.0,539.0
+Bar,Extra Hard,235.0,418.0
+Bar,Hard,759.0,985.0
+Bar,Medium,765.0,1492.0
+Grouping Line,Extra Hard,28.0,17.0
+Grouping Line,Hard,10.0,16.0
+Grouping Line,Medium,,1.0
+Grouping Scatter,Easy,24.0,43.0
+Grouping Scatter,Hard,2.0,
+Grouping Scatter,Medium,7.0,51.0
+Line,Easy,27.0,51.0
+Line,Extra Hard,13.0,46.0
+Line,Hard,26.0,51.0
+Line,Medium,56.0,110.0
+Pie,Easy,214.0,51.0
+Pie,Extra Hard,15.0,2.0
+Pie,Hard,49.0,5.0
+Pie,Medium,162.0,21.0
+Scatter,Easy,24.0,137.0
+Scatter,Extra Hard,1.0,10.0
+Scatter,Hard,3.0,11.0
+Scatter,Medium,21.0,59.0
+Stacked Bar,Easy,,1.0
+Stacked Bar,Extra Hard,96.0,56.0
+Stacked Bar,Hard,23.0,130.0
+Stacked Bar,Medium,1.0,52.0
